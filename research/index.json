@@ -1,0 +1,869 @@
+[
+  {
+    "index": 1,
+    "slug": "20230308-001",
+    "filename": "20230308-001.md",
+    "title": "数据要素市场化配置中的确权机制研究",
+    "subtitle": "从产权界定到价值释放的制度路径",
+    "date": "2023-03-08",
+    "domain": "数据要素",
+    "keywords": [
+      "数据确权",
+      "数据资产",
+      "产权制度"
+    ],
+    "charts": [
+      "chart_001_trend.png",
+      "chart_001_extra.png"
+    ]
+  },
+  {
+    "index": 2,
+    "slug": "20230322-002",
+    "filename": "20230322-002.md",
+    "title": "隐私计算技术路线对比与选型分析",
+    "subtitle": "联邦学习、MPC与TEE的适用场景评估",
+    "date": "2023-03-22",
+    "domain": "隐私计算",
+    "keywords": [
+      "联邦学习",
+      "多方安全计算",
+      "技术选型"
+    ],
+    "charts": [
+      "chart_002_compare.png"
+    ]
+  },
+  {
+    "index": 3,
+    "slug": "20230415-003",
+    "filename": "20230415-003.md",
+    "title": "大语言模型对企业数字化转型的影响评估",
+    "subtitle": "从GPT到行业大模型的演进路径",
+    "date": "2023-04-15",
+    "domain": "人工智能",
+    "keywords": [
+      "大模型",
+      "GPT",
+      "产业影响"
+    ],
+    "charts": [
+      "chart_003_share.png"
+    ]
+  },
+  {
+    "index": 4,
+    "slug": "20230510-004",
+    "filename": "20230510-004.md",
+    "title": "数据分类分级制度落地实践与挑战",
+    "subtitle": "基于《数据安全法》的企业合规建设",
+    "date": "2023-05-10",
+    "domain": "数据安全",
+    "keywords": [
+      "数据分类分级",
+      "合规治理",
+      "数据安全法"
+    ],
+    "charts": [
+      "chart_004_heatmap.png",
+      "chart_004_extra.png"
+    ]
+  },
+  {
+    "index": 5,
+    "slug": "20230528-005",
+    "filename": "20230528-005.md",
+    "title": "全同态加密工程化应用进展与性能优化",
+    "subtitle": "从理论突破到产业落地的关键路径",
+    "date": "2023-05-28",
+    "domain": "隐私计算",
+    "keywords": [
+      "同态加密",
+      "密码学",
+      "计算效率"
+    ],
+    "charts": [
+      "chart_005_area.png"
+    ]
+  },
+  {
+    "index": 6,
+    "slug": "20230618-006",
+    "filename": "20230618-006.md",
+    "title": "全国数据交易所发展格局与运营模式比较",
+    "subtitle": "北京、上海、深圳等地数据交易实践分析",
+    "date": "2023-06-18",
+    "domain": "数据要素",
+    "keywords": [
+      "数据交易",
+      "数据交易所",
+      "定价机制"
+    ],
+    "charts": [
+      "chart_006_scatter.png"
+    ]
+  },
+  {
+    "index": 7,
+    "slug": "20230705-007",
+    "filename": "20230705-007.md",
+    "title": "人工智能安全与对齐问题研究综述",
+    "subtitle": "大模型时代的AI治理新挑战",
+    "date": "2023-07-05",
+    "domain": "人工智能",
+    "keywords": [
+      "AI安全",
+      "对齐问题",
+      "可信AI"
+    ],
+    "charts": [
+      "chart_007_violin.png",
+      "chart_007_extra.png"
+    ]
+  },
+  {
+    "index": 8,
+    "slug": "20230720-008",
+    "filename": "20230720-008.md",
+    "title": "跨境数据流动安全评估机制研究",
+    "subtitle": "全球数据治理格局下的中国实践",
+    "date": "2023-07-20",
+    "domain": "数据安全",
+    "keywords": [
+      "跨境数据",
+      "数据出境",
+      "安全评估"
+    ],
+    "charts": [
+      "chart_008_radar.png"
+    ]
+  },
+  {
+    "index": 9,
+    "slug": "20230812-009",
+    "filename": "20230812-009.md",
+    "title": "联邦查询技术在多方数据协同中的应用研究",
+    "subtitle": "安全SQL执行引擎的设计与优化",
+    "date": "2023-08-12",
+    "domain": "隐私计算",
+    "keywords": [
+      "联邦查询",
+      "安全SQL",
+      "密态计算"
+    ],
+    "charts": [
+      "chart_009_trend.png"
+    ]
+  },
+  {
+    "index": 10,
+    "slug": "20230903-010",
+    "filename": "20230903-010.md",
+    "title": "公共数据授权运营模式与价值释放机制",
+    "subtitle": "政务数据资源化利用的制度创新",
+    "date": "2023-09-03",
+    "domain": "数据要素",
+    "keywords": [
+      "公共数据",
+      "开放共享",
+      "授权运营"
+    ],
+    "charts": [
+      "chart_010_compare.png",
+      "chart_010_extra.png"
+    ]
+  },
+  {
+    "index": 11,
+    "slug": "20230925-011",
+    "filename": "20230925-011.md",
+    "title": "检索增强生成技术在企业知识管理中的应用",
+    "subtitle": "RAG架构的工程实践与优化策略",
+    "date": "2023-09-25",
+    "domain": "人工智能",
+    "keywords": [
+      "RAG",
+      "检索增强",
+      "知识库"
+    ],
+    "charts": [
+      "chart_011_share.png"
+    ]
+  },
+  {
+    "index": 12,
+    "slug": "20231015-012",
+    "filename": "20231015-012.md",
+    "title": "个人信息去标识化技术标准与实施路径",
+    "subtitle": "合规场景下的数据脱敏技术体系",
+    "date": "2023-10-15",
+    "domain": "数据安全",
+    "keywords": [
+      "个人信息保护",
+      "隐私权",
+      "去标识化"
+    ],
+    "charts": [
+      "chart_012_heatmap.png"
+    ]
+  },
+  {
+    "index": 13,
+    "slug": "20231108-013",
+    "filename": "20231108-013.md",
+    "title": "可信执行环境技术发展与产业应用前景",
+    "subtitle": "从Intel SGX到国产芯片TEE的演进",
+    "date": "2023-11-08",
+    "domain": "隐私计算",
+    "keywords": [
+      "可信执行环境",
+      "TEE",
+      "芯片安全"
+    ],
+    "charts": [
+      "chart_013_area.png",
+      "chart_013_extra.png"
+    ]
+  },
+  {
+    "index": 14,
+    "slug": "20231122-014",
+    "filename": "20231122-014.md",
+    "title": "数据资产入表政策解读与企业应对策略",
+    "subtitle": "财政部新规下的数据资产化路径",
+    "date": "2023-11-22",
+    "domain": "数据要素",
+    "keywords": [
+      "数据资产入表",
+      "会计准则",
+      "数据估值"
+    ],
+    "charts": [
+      "chart_014_scatter.png"
+    ]
+  },
+  {
+    "index": 15,
+    "slug": "20231210-015",
+    "filename": "20231210-015.md",
+    "title": "全球AI治理监管框架比较研究",
+    "subtitle": "欧盟AI法案、中美监管实践与启示",
+    "date": "2023-12-10",
+    "domain": "人工智能",
+    "keywords": [
+      "AI治理",
+      "监管框架",
+      "伦理规范"
+    ],
+    "charts": [
+      "chart_015_violin.png"
+    ]
+  },
+  {
+    "index": 16,
+    "slug": "20231228-016",
+    "filename": "20231228-016.md",
+    "title": "差分隐私在机器学习训练中的应用与挑战",
+    "subtitle": "隐私预算分配与模型精度的平衡策略",
+    "date": "2023-12-28",
+    "domain": "隐私计算",
+    "keywords": [
+      "隐私保护",
+      "差分隐私",
+      "数据脱敏"
+    ],
+    "charts": [
+      "chart_016_radar.png",
+      "chart_016_extra.png"
+    ]
+  },
+  {
+    "index": 17,
+    "slug": "20240115-017",
+    "filename": "20240115-017.md",
+    "title": "数据安全治理成熟度评估模型与实施指南",
+    "subtitle": "DSMM框架下的企业数据安全能力建设",
+    "date": "2024-01-15",
+    "domain": "数据安全",
+    "keywords": [
+      "数据安全治理",
+      "DSMM",
+      "成熟度模型"
+    ],
+    "charts": [
+      "chart_017_trend.png"
+    ]
+  },
+  {
+    "index": 18,
+    "slug": "20240205-018",
+    "filename": "20240205-018.md",
+    "title": "数据要素流通体系建设进展与趋势展望",
+    "subtitle": "从\"二十条\"到地方实践的政策传导",
+    "date": "2024-02-05",
+    "domain": "数据要素",
+    "keywords": [
+      "数据要素市场",
+      "制度建设",
+      "流通体系"
+    ],
+    "charts": [
+      "chart_018_compare.png"
+    ]
+  },
+  {
+    "index": 19,
+    "slug": "20240226-019",
+    "filename": "20240226-019.md",
+    "title": "多模态大模型技术演进与行业应用前景",
+    "subtitle": "视觉语言模型在垂直场景的落地分析",
+    "date": "2024-02-26",
+    "domain": "人工智能",
+    "keywords": [
+      "多模态",
+      "视觉语言模型",
+      "AIGC"
+    ],
+    "charts": [
+      "chart_019_share.png",
+      "chart_019_extra.png"
+    ]
+  },
+  {
+    "index": 20,
+    "slug": "20240318-020",
+    "filename": "20240318-020.md",
+    "title": "中国隐私计算平台市场竞争格局分析",
+    "subtitle": "技术路线、商业模式与头部厂商比较",
+    "date": "2024-03-18",
+    "domain": "隐私计算",
+    "keywords": [
+      "隐私计算平台",
+      "市场格局",
+      "商业模式"
+    ],
+    "charts": [
+      "chart_020_heatmap.png"
+    ]
+  },
+  {
+    "index": 21,
+    "slug": "20240408-021",
+    "filename": "20240408-021.md",
+    "title": "AI模型供应链安全风险评估与防护策略",
+    "subtitle": "从Pickle注入到模型投毒的威胁分析",
+    "date": "2024-04-08",
+    "domain": "数据安全",
+    "keywords": [
+      "供应链安全",
+      "软件成分分析",
+      "SBOM"
+    ],
+    "charts": [
+      "chart_021_area.png"
+    ]
+  },
+  {
+    "index": 22,
+    "slug": "20240422-022",
+    "filename": "20240422-022.md",
+    "title": "算力基础设施与数据要素协同发展研究",
+    "subtitle": "东数西算背景下的算力网络布局",
+    "date": "2024-04-22",
+    "domain": "数据要素",
+    "keywords": [
+      "算力网络",
+      "东数西算",
+      "算力经济"
+    ],
+    "charts": [
+      "chart_022_scatter.png",
+      "chart_022_extra.png"
+    ]
+  },
+  {
+    "index": 23,
+    "slug": "20240512-023",
+    "filename": "20240512-023.md",
+    "title": "AI Agent技术发展与产业应用研究",
+    "subtitle": "从AutoGPT到企业级智能代理的演进",
+    "date": "2024-05-12",
+    "domain": "人工智能",
+    "keywords": [
+      "AI Agent",
+      "自主智能体",
+      "任务执行"
+    ],
+    "charts": [
+      "chart_023_violin.png"
+    ]
+  },
+  {
+    "index": 24,
+    "slug": "20240603-024",
+    "filename": "20240603-024.md",
+    "title": "联邦学习在金融风控领域的落地实践",
+    "subtitle": "多方联合建模的技术方案与业务价值",
+    "date": "2024-06-03",
+    "domain": "隐私计算",
+    "keywords": [
+      "联邦学习",
+      "金融风控",
+      "信用评估"
+    ],
+    "charts": [
+      "chart_024_radar.png"
+    ]
+  },
+  {
+    "index": 25,
+    "slug": "20240620-025",
+    "filename": "20240620-025.md",
+    "title": "零信任安全架构在数据保护中的应用",
+    "subtitle": "从边界防护到持续验证的范式转换",
+    "date": "2024-06-20",
+    "domain": "数据安全",
+    "keywords": [
+      "零信任",
+      "安全架构",
+      "身份认证"
+    ],
+    "charts": [
+      "chart_025_trend.png",
+      "chart_025_extra.png"
+    ]
+  },
+  {
+    "index": 26,
+    "slug": "20240710-026",
+    "filename": "20240710-026.md",
+    "title": "医疗健康大数据共享的隐私保护方案",
+    "subtitle": "跨机构临床数据协同的技术与制度",
+    "date": "2024-07-10",
+    "domain": "数据要素",
+    "keywords": [
+      "医疗数据",
+      "健康大数据",
+      "数据共享"
+    ],
+    "charts": [
+      "chart_026_compare.png"
+    ]
+  },
+  {
+    "index": 27,
+    "slug": "20240728-027",
+    "filename": "20240728-027.md",
+    "title": "国产开源大模型发展态势与技术评测",
+    "subtitle": "DeepSeek、通义千问等开源生态分析",
+    "date": "2024-07-28",
+    "domain": "人工智能",
+    "keywords": [
+      "开源模型",
+      "DeepSeek",
+      "国产大模型"
+    ],
+    "charts": [
+      "chart_027_share.png"
+    ]
+  },
+  {
+    "index": 28,
+    "slug": "20240815-028",
+    "filename": "20240815-028.md",
+    "title": "隐私信息检索协议的工程化实践",
+    "subtitle": "PIR协议在数据查询场景的性能优化",
+    "date": "2024-08-15",
+    "domain": "隐私计算",
+    "keywords": [
+      "隐私信息检索",
+      "PIR",
+      "密码学"
+    ],
+    "charts": [
+      "chart_028_heatmap.png",
+      "chart_028_extra.png"
+    ]
+  },
+  {
+    "index": 29,
+    "slug": "20240905-029",
+    "filename": "20240905-029.md",
+    "title": "数据水印技术在数据溯源追踪中的应用",
+    "subtitle": "隐写术与鲁棒水印的工程化实践",
+    "date": "2024-09-05",
+    "domain": "数据安全",
+    "keywords": [
+      "数据水印",
+      "溯源追踪",
+      "版权保护"
+    ],
+    "charts": [
+      "chart_029_area.png"
+    ]
+  },
+  {
+    "index": 30,
+    "slug": "20240922-030",
+    "filename": "20240922-030.md",
+    "title": "数字政府建设中的数据治理能力评估",
+    "subtitle": "省级数据管理机构改革与实践成效",
+    "date": "2024-09-22",
+    "domain": "数据要素",
+    "keywords": [
+      "数字政府",
+      "政务数据",
+      "数字中国"
+    ],
+    "charts": [
+      "chart_030_scatter.png"
+    ]
+  },
+  {
+    "index": 31,
+    "slug": "20241008-031",
+    "filename": "20241008-031.md",
+    "title": "边缘AI推理技术发展与隐私保护优势",
+    "subtitle": "端侧部署在敏感场景中的应用价值",
+    "date": "2024-10-08",
+    "domain": "人工智能",
+    "keywords": [
+      "边缘AI",
+      "端侧推理",
+      "模型压缩"
+    ],
+    "charts": [
+      "chart_031_violin.png",
+      "chart_031_extra.png"
+    ]
+  },
+  {
+    "index": 32,
+    "slug": "20241025-032",
+    "filename": "20241025-032.md",
+    "title": "安全沙箱技术在数据可信计算中的应用",
+    "subtitle": "容器化隔离与安全函数计算架构设计",
+    "date": "2024-10-25",
+    "domain": "隐私计算",
+    "keywords": [
+      "安全沙箱",
+      "可信计算",
+      "代码审计"
+    ],
+    "charts": [
+      "chart_032_radar.png"
+    ]
+  },
+  {
+    "index": 33,
+    "slug": "20241112-033",
+    "filename": "20241112-033.md",
+    "title": "后量子密码迁移对隐私计算的影响评估",
+    "subtitle": "格基密码与同态加密的未来兼容性",
+    "date": "2024-11-12",
+    "domain": "数据安全",
+    "keywords": [
+      "密码学",
+      "后量子密码",
+      "抗量子"
+    ],
+    "charts": [
+      "chart_033_trend.png"
+    ]
+  },
+  {
+    "index": 34,
+    "slug": "20241128-034",
+    "filename": "20241128-034.md",
+    "title": "数据资产评估方法论与实践案例研究",
+    "subtitle": "成本法、收益法与市场法的适用性比较",
+    "date": "2024-11-28",
+    "domain": "数据要素",
+    "keywords": [
+      "数据资产评估",
+      "估值方法",
+      "数据定价"
+    ],
+    "charts": [
+      "chart_034_compare.png",
+      "chart_034_extra.png"
+    ]
+  },
+  {
+    "index": 35,
+    "slug": "20241215-035",
+    "filename": "20241215-035.md",
+    "title": "AI驱动的安全运营中心建设方案研究",
+    "subtitle": "大模型在威胁检测与响应中的应用",
+    "date": "2024-12-15",
+    "domain": "人工智能",
+    "keywords": [
+      "AI+安全",
+      "智能安全运营",
+      "SOAR"
+    ],
+    "charts": [
+      "chart_035_share.png"
+    ]
+  },
+  {
+    "index": 36,
+    "slug": "20250108-036",
+    "filename": "20250108-036.md",
+    "title": "隐私保护检索增强生成系统技术研究",
+    "subtitle": "PPRAG架构的设计原理与安全性分析",
+    "date": "2025-01-08",
+    "domain": "隐私计算",
+    "keywords": [
+      "隐私保护RAG",
+      "安全检索",
+      "加密查询"
+    ],
+    "charts": [
+      "chart_036_heatmap.png"
+    ]
+  },
+  {
+    "index": 37,
+    "slug": "20250205-037",
+    "filename": "20250205-037.md",
+    "title": "容器化部署环境下的数据安全加固方案",
+    "subtitle": "从镜像扫描到运行时防护的全栈策略",
+    "date": "2025-02-05",
+    "domain": "数据安全",
+    "keywords": [
+      "容器安全",
+      "Docker",
+      "运行时防护"
+    ],
+    "charts": [
+      "chart_037_area.png",
+      "chart_037_extra.png"
+    ]
+  },
+  {
+    "index": 38,
+    "slug": "20250220-038",
+    "filename": "20250220-038.md",
+    "title": "能源行业数据要素流通与碳数据资产化",
+    "subtitle": "双碳目标下的能源数据治理实践",
+    "date": "2025-02-20",
+    "domain": "数据要素",
+    "keywords": [
+      "能源数据",
+      "碳数据",
+      "绿色金融"
+    ],
+    "charts": [
+      "chart_038_scatter.png"
+    ]
+  },
+  {
+    "index": 39,
+    "slug": "20250310-039",
+    "filename": "20250310-039.md",
+    "title": "具身智能发展趋势与数据安全需求分析",
+    "subtitle": "物理世界AI的隐私边界与安全挑战",
+    "date": "2025-03-10",
+    "domain": "人工智能",
+    "keywords": [
+      "具身智能",
+      "机器人",
+      "感知决策"
+    ],
+    "charts": [
+      "chart_039_violin.png"
+    ]
+  },
+  {
+    "index": 40,
+    "slug": "20250325-040",
+    "filename": "20250325-040.md",
+    "title": "安全多方计算协议优化与性能基准评测",
+    "subtitle": "ABY3、Semi2k等协议在实际场景的效率比较",
+    "date": "2025-03-25",
+    "domain": "隐私计算",
+    "keywords": [
+      "秘密共享",
+      "安全多方计算",
+      "协议优化"
+    ],
+    "charts": [
+      "chart_040_radar.png",
+      "chart_040_extra.png"
+    ]
+  },
+  {
+    "index": 41,
+    "slug": "20250408-041",
+    "filename": "20250408-041.md",
+    "title": "API安全治理框架与数据泄露防护实践",
+    "subtitle": "面向开放接口的全生命周期安全管理",
+    "date": "2025-04-08",
+    "domain": "数据安全",
+    "keywords": [
+      "API安全",
+      "接口治理",
+      "数据泄露"
+    ],
+    "charts": [
+      "chart_041_trend.png"
+    ]
+  },
+  {
+    "index": 42,
+    "slug": "20250515-042",
+    "filename": "20250515-042.md",
+    "title": "交通行业数据要素价值发现与隐私保护",
+    "subtitle": "车路协同场景下的数据安全治理",
+    "date": "2025-05-15",
+    "domain": "数据要素",
+    "keywords": [
+      "交通数据",
+      "智慧交通",
+      "自动驾驶"
+    ],
+    "charts": [
+      "chart_042_compare.png"
+    ]
+  },
+  {
+    "index": 43,
+    "slug": "20250602-043",
+    "filename": "20250602-043.md",
+    "title": "小模型高效推理在隐私敏感场景的应用",
+    "subtitle": "知识蒸馏与量化技术的本地部署方案",
+    "date": "2025-06-02",
+    "domain": "人工智能",
+    "keywords": [
+      "小模型",
+      "蒸馏",
+      "高效推理"
+    ],
+    "charts": [
+      "chart_043_share.png",
+      "chart_043_extra.png"
+    ]
+  },
+  {
+    "index": 44,
+    "slug": "20250710-044",
+    "filename": "20250710-044.md",
+    "title": "属性基加密在医疗数据访问控制中的应用",
+    "subtitle": "基于CP-ABE的细粒度权限管理方案",
+    "date": "2025-07-10",
+    "domain": "隐私计算",
+    "keywords": [
+      "属性基加密",
+      "ABE",
+      "细粒度控制"
+    ],
+    "charts": [
+      "chart_044_heatmap.png"
+    ]
+  },
+  {
+    "index": 45,
+    "slug": "20250805-045",
+    "filename": "20250805-045.md",
+    "title": "数据安全审计技术体系与自动化实践",
+    "subtitle": "从日志采集到合规报告的全链路方案",
+    "date": "2025-08-05",
+    "domain": "数据安全",
+    "keywords": [
+      "安全审计",
+      "日志分析",
+      "合规检查"
+    ],
+    "charts": [
+      "chart_045_area.png"
+    ]
+  },
+  {
+    "index": 46,
+    "slug": "20250918-046",
+    "filename": "20250918-046.md",
+    "title": "制造业数据空间建设与数据要素安全流通",
+    "subtitle": "工业互联网环境下的数据可信共享",
+    "date": "2025-09-18",
+    "domain": "数据要素",
+    "keywords": [
+      "制造业",
+      "工业数据",
+      "数据空间"
+    ],
+    "charts": [
+      "chart_046_scatter.png",
+      "chart_046_extra.png"
+    ]
+  },
+  {
+    "index": 47,
+    "slug": "20251012-047",
+    "filename": "20251012-047.md",
+    "title": "AI辅助代码生成的安全性评估与治理建议",
+    "subtitle": "大模型生成代码的漏洞模式与防护措施",
+    "date": "2025-10-12",
+    "domain": "人工智能",
+    "keywords": [
+      "AI代码生成",
+      "Copilot",
+      "开发安全"
+    ],
+    "charts": [
+      "chart_047_violin.png"
+    ]
+  },
+  {
+    "index": 48,
+    "slug": "20251120-048",
+    "filename": "20251120-048.md",
+    "title": "隐私计算互联互通标准进展与产业影响",
+    "subtitle": "跨平台协作的技术标准与生态建设",
+    "date": "2025-11-20",
+    "domain": "隐私计算",
+    "keywords": [
+      "隐私计算标准",
+      "互联互通",
+      "行业标准"
+    ],
+    "charts": [
+      "chart_048_radar.png"
+    ]
+  },
+  {
+    "index": 49,
+    "slug": "20260115-049",
+    "filename": "20260115-049.md",
+    "title": "二进制级深度安全检测在模型部署中的实践",
+    "subtitle": "ClamAV、YARA与ModelScan联合检测方案",
+    "date": "2026-01-15",
+    "domain": "数据安全",
+    "keywords": [
+      "二进制安全",
+      "恶意检测",
+      "模型安全"
+    ],
+    "charts": [
+      "chart_049_trend.png",
+      "chart_049_extra.png"
+    ]
+  },
+  {
+    "index": 50,
+    "slug": "20260228-050",
+    "filename": "20260228-050.md",
+    "title": "2026年数据要素市场发展趋势与政策展望",
+    "subtitle": "从制度建设到规模化流通的关键转折",
+    "date": "2026-02-28",
+    "domain": "数据要素",
+    "keywords": [
+      "数据要素",
+      "2026展望",
+      "政策趋势"
+    ],
+    "charts": [
+      "chart_050_compare.png"
+    ]
+  }
+]
