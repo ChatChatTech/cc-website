@@ -19,7 +19,8 @@
       "chart_001_heatmap.png",
       "chart_001_grouped.png",
       "chart_001_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-ai-01.jpg"
   },
   {
     "index": 2,
@@ -39,7 +40,8 @@
       "chart_002_industry.png",
       "chart_002_share.png",
       "chart_002_area.png"
-    ]
+    ],
+    "hero_image": "images/hero-ai-01.jpg"
   },
   {
     "index": 3,
@@ -60,7 +62,8 @@
       "chart_003_share.png",
       "chart_003_scatter.png",
       "chart_003_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-code-03.jpg"
   },
   {
     "index": 4,
@@ -81,7 +84,8 @@
       "chart_004_share.png",
       "chart_004_violin.png",
       "chart_004_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   },
   {
     "index": 5,
@@ -102,7 +106,8 @@
       "chart_005_share.png",
       "chart_005_radar.png",
       "chart_005_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-cloud-01.jpg"
   },
   {
     "index": 6,
@@ -122,7 +127,8 @@
       "chart_006_industry.png",
       "chart_006_share.png",
       "chart_006_heatmap.png"
-    ]
+    ],
+    "hero_image": "images/hero-binary-01.jpg"
   },
   {
     "index": 7,
@@ -144,7 +150,8 @@
       "chart_007_area.png",
       "chart_007_grouped.png",
       "chart_007_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-02.jpg"
   },
   {
     "index": 8,
@@ -164,7 +171,8 @@
       "chart_008_industry.png",
       "chart_008_share.png",
       "chart_008_scatter.png"
-    ]
+    ],
+    "hero_image": "images/hero-server-01.jpg"
   },
   {
     "index": 9,
@@ -185,7 +193,8 @@
       "chart_009_share.png",
       "chart_009_violin.png",
       "chart_009_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 10,
@@ -206,7 +215,8 @@
       "chart_010_share.png",
       "chart_010_radar.png",
       "chart_010_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-02.jpg"
   },
   {
     "index": 11,
@@ -227,7 +237,8 @@
       "chart_011_share.png",
       "chart_011_heatmap.png",
       "chart_011_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 12,
@@ -247,7 +258,8 @@
       "chart_012_industry.png",
       "chart_012_share.png",
       "chart_012_area.png"
-    ]
+    ],
+    "hero_image": "images/hero-digital-01.jpg"
   },
   {
     "index": 13,
@@ -269,7 +281,8 @@
       "chart_013_scatter.png",
       "chart_013_grouped.png",
       "chart_013_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   },
   {
     "index": 14,
@@ -289,7 +302,8 @@
       "chart_014_industry.png",
       "chart_014_share.png",
       "chart_014_violin.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-02.jpg"
   },
   {
     "index": 15,
@@ -310,7 +324,8 @@
       "chart_015_share.png",
       "chart_015_radar.png",
       "chart_015_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-network-01.jpg"
   },
   {
     "index": 16,
@@ -331,7 +346,8 @@
       "chart_016_share.png",
       "chart_016_heatmap.png",
       "chart_016_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-02.jpg"
   },
   {
     "index": 17,
@@ -352,7 +368,8 @@
       "chart_017_share.png",
       "chart_017_area.png",
       "chart_017_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-circuit-01.jpg"
   },
   {
     "index": 18,
@@ -372,7 +389,8 @@
       "chart_018_industry.png",
       "chart_018_share.png",
       "chart_018_scatter.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 19,
@@ -394,7 +412,8 @@
       "chart_019_violin.png",
       "chart_019_grouped.png",
       "chart_019_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-cloud-01.jpg"
   },
   {
     "index": 20,
@@ -414,7 +433,8 @@
       "chart_020_industry.png",
       "chart_020_share.png",
       "chart_020_radar.png"
-    ]
+    ],
+    "hero_image": "images/hero-ai-01.jpg"
   },
   {
     "index": 21,
@@ -435,7 +455,8 @@
       "chart_021_share.png",
       "chart_021_heatmap.png",
       "chart_021_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 22,
@@ -456,7 +477,8 @@
       "chart_022_share.png",
       "chart_022_area.png",
       "chart_022_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-cloud-01.jpg"
   },
   {
     "index": 23,
@@ -477,7 +499,8 @@
       "chart_023_share.png",
       "chart_023_scatter.png",
       "chart_023_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-digital-02.jpg"
   },
   {
     "index": 24,
@@ -497,7 +520,8 @@
       "chart_024_industry.png",
       "chart_024_share.png",
       "chart_024_violin.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   },
   {
     "index": 25,
@@ -519,7 +543,8 @@
       "chart_025_radar.png",
       "chart_025_grouped.png",
       "chart_025_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-server-01.jpg"
   },
   {
     "index": 26,
@@ -539,7 +564,8 @@
       "chart_026_industry.png",
       "chart_026_share.png",
       "chart_026_heatmap.png"
-    ]
+    ],
+    "hero_image": "images/hero-server-01.jpg"
   },
   {
     "index": 27,
@@ -560,7 +586,8 @@
       "chart_027_share.png",
       "chart_027_area.png",
       "chart_027_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-tech-02.jpg"
   },
   {
     "index": 28,
@@ -581,7 +608,8 @@
       "chart_028_share.png",
       "chart_028_scatter.png",
       "chart_028_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-ai-01.jpg"
   },
   {
     "index": 29,
@@ -602,7 +630,8 @@
       "chart_029_share.png",
       "chart_029_violin.png",
       "chart_029_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-tech-04.jpg"
   },
   {
     "index": 30,
@@ -622,7 +651,8 @@
       "chart_030_industry.png",
       "chart_030_share.png",
       "chart_030_radar.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   },
   {
     "index": 31,
@@ -644,7 +674,8 @@
       "chart_031_heatmap.png",
       "chart_031_grouped.png",
       "chart_031_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-tech-03.jpg"
   },
   {
     "index": 32,
@@ -664,7 +695,8 @@
       "chart_032_industry.png",
       "chart_032_share.png",
       "chart_032_area.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 33,
@@ -685,7 +717,8 @@
       "chart_033_share.png",
       "chart_033_scatter.png",
       "chart_033_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   },
   {
     "index": 34,
@@ -706,7 +739,8 @@
       "chart_034_share.png",
       "chart_034_violin.png",
       "chart_034_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-server-01.jpg"
   },
   {
     "index": 35,
@@ -727,7 +761,8 @@
       "chart_035_share.png",
       "chart_035_radar.png",
       "chart_035_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-network-01.jpg"
   },
   {
     "index": 36,
@@ -747,7 +782,8 @@
       "chart_036_industry.png",
       "chart_036_share.png",
       "chart_036_heatmap.png"
-    ]
+    ],
+    "hero_image": "images/hero-digital-01.jpg"
   },
   {
     "index": 37,
@@ -769,7 +805,8 @@
       "chart_037_area.png",
       "chart_037_grouped.png",
       "chart_037_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-tech-01.jpg"
   },
   {
     "index": 38,
@@ -789,7 +826,8 @@
       "chart_038_industry.png",
       "chart_038_share.png",
       "chart_038_scatter.png"
-    ]
+    ],
+    "hero_image": "images/hero-tech-04.jpg"
   },
   {
     "index": 39,
@@ -810,7 +848,8 @@
       "chart_039_share.png",
       "chart_039_violin.png",
       "chart_039_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-code-01.jpg"
   },
   {
     "index": 40,
@@ -831,7 +870,8 @@
       "chart_040_share.png",
       "chart_040_radar.png",
       "chart_040_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-code-01.jpg"
   },
   {
     "index": 41,
@@ -852,7 +892,8 @@
       "chart_041_share.png",
       "chart_041_heatmap.png",
       "chart_041_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 42,
@@ -872,7 +913,8 @@
       "chart_042_industry.png",
       "chart_042_share.png",
       "chart_042_area.png"
-    ]
+    ],
+    "hero_image": "images/hero-code-01.jpg"
   },
   {
     "index": 43,
@@ -894,7 +936,8 @@
       "chart_043_scatter.png",
       "chart_043_grouped.png",
       "chart_043_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   },
   {
     "index": 44,
@@ -914,7 +957,8 @@
       "chart_044_industry.png",
       "chart_044_share.png",
       "chart_044_violin.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-02.jpg"
   },
   {
     "index": 45,
@@ -935,7 +979,8 @@
       "chart_045_share.png",
       "chart_045_radar.png",
       "chart_045_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-digital-01.jpg"
   },
   {
     "index": 46,
@@ -956,7 +1001,8 @@
       "chart_046_share.png",
       "chart_046_heatmap.png",
       "chart_046_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-circuit-01.jpg"
   },
   {
     "index": 47,
@@ -977,7 +1023,8 @@
       "chart_047_share.png",
       "chart_047_area.png",
       "chart_047_grouped.png"
-    ]
+    ],
+    "hero_image": "images/hero-tech-04.jpg"
   },
   {
     "index": 48,
@@ -997,7 +1044,8 @@
       "chart_048_industry.png",
       "chart_048_share.png",
       "chart_048_scatter.png"
-    ]
+    ],
+    "hero_image": "images/hero-data-01.jpg"
   },
   {
     "index": 49,
@@ -1019,7 +1067,8 @@
       "chart_049_violin.png",
       "chart_049_grouped.png",
       "chart_049_hbar.png"
-    ]
+    ],
+    "hero_image": "images/hero-circuit-01.jpg"
   },
   {
     "index": 50,
@@ -1039,6 +1088,7 @@
       "chart_050_industry.png",
       "chart_050_share.png",
       "chart_050_radar.png"
-    ]
+    ],
+    "hero_image": "images/hero-security-01.jpg"
   }
 ]

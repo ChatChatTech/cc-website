@@ -29,8 +29,8 @@ plt.rcParams['savefig.dpi'] = 150
 plt.rcParams['savefig.bbox'] = 'tight'
 
 PRIMARY = '#165DFF'
-COLORS = ['#165DFF', '#0FC6C2', '#F7BA1E', '#D91AD9', '#14C9C9',
-          '#F53F3F', '#722ED1', '#3491FA', '#9FDB1D', '#FF7D00']
+COLORS = ['#165DFF', '#0A1628', '#3491FA', '#86909C', '#1D2129',
+          '#4E5969', '#A0B0C8', '#0E42D2', '#C9CDD4', '#2B3A52']
 
 BASE_DIR = Path('/data/projs/cc-website')
 RESEARCH_DIR = BASE_DIR / 'research'
@@ -39,28 +39,15 @@ CHARTS_DIR = RESEARCH_DIR / 'charts'
 # ============================================================
 # Hero 背景图映射
 # ============================================================
-HERO_IMAGES = {
-    '数据要素': [
-        'images/hero-data-01.jpg', 'images/hero-data-02.jpg',
-        'images/hero-network-01.jpg', 'images/hero-tech-03.jpg',
-        'images/hero-digital-01.jpg',
-    ],
-    '隐私计算': [
-        'images/hero-security-01.jpg', 'images/hero-security-02.jpg',
-        'images/hero-binary-01.jpg', 'images/hero-circuit-01.jpg',
-        'images/hero-cloud-01.jpg',
-    ],
-    '数据安全': [
-        'images/hero-security-03.jpg', 'images/hero-code-01.jpg',
-        'images/hero-code-02.jpg', 'images/hero-server-01.jpg',
-        'images/hero-tech-02.jpg',
-    ],
-    '人工智能': [
-        'images/hero-ai-01.jpg', 'images/hero-digital-02.jpg',
-        'images/hero-tech-01.jpg', 'images/hero-tech-04.jpg',
-        'images/hero-code-03.jpg',
-    ],
-}
+ALL_HERO_IMAGES = [
+    'images/hero-ai-01.jpg', 'images/hero-binary-01.jpg', 'images/hero-circuit-01.jpg',
+    'images/hero-cloud-01.jpg', 'images/hero-code-01.jpg', 'images/hero-code-02.jpg',
+    'images/hero-code-03.jpg', 'images/hero-data-01.jpg', 'images/hero-data-02.jpg',
+    'images/hero-digital-01.jpg', 'images/hero-digital-02.jpg', 'images/hero-network-01.jpg',
+    'images/hero-security-01.jpg', 'images/hero-security-02.jpg', 'images/hero-security-03.jpg',
+    'images/hero-server-01.jpg', 'images/hero-tech-01.jpg', 'images/hero-tech-02.jpg',
+    'images/hero-tech-03.jpg', 'images/hero-tech-04.jpg',
+]
 
 # ============================================================
 # 50篇文章定义
@@ -504,7 +491,8 @@ def generate_body(idx, article, charts):
 def build_html(idx, article, charts, body_html):
     d = article
     slug = f'{d["date"].replace("-","")}-{idx+1:03d}'
-    hero_img = HERO_IMAGES.get(d['domain'], HERO_IMAGES['数据要素'])[idx % 5]
+    random.seed(idx * 73 + 31)
+    hero_img = random.choice(ALL_HERO_IMAGES)
     read_min = max(5, len(body_html) // 800)
 
     # Related articles
@@ -522,7 +510,7 @@ def build_html(idx, article, charts, body_html):
 
     tags = ''.join(f'<span class="article-tag">{E(k)}</span>' for k in d['keywords'])
 
-    return f'''<!DOCTYPE html>
+    page_html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
@@ -613,6 +601,7 @@ if(bt)bt.addEventListener("click",function(){{window.scrollTo({{top:0,behavior:"
 </script>
 </body>
 </html>'''
+    return page_html, hero_img
 
 
 # ============================================================
@@ -627,7 +616,7 @@ def main():
         charts = generate_charts(idx, art)
         _, body = generate_body(idx, art, charts)
         slug = f'{art["date"].replace("-","")}-{idx+1:03d}'
-        html = build_html(idx, art, charts, body)
+        html, hero_img = build_html(idx, art, charts, body)
         with open(RESEARCH_DIR / f'{slug}.html', 'w', encoding='utf-8') as f:
             f.write(html)
         meta.append({
@@ -635,6 +624,7 @@ def main():
             'title': art['title'], 'subtitle': art['subtitle'],
             'date': art['date'], 'domain': art['domain'],
             'keywords': art['keywords'], 'charts': charts,
+            'hero_image': hero_img,
         })
 
     with open(RESEARCH_DIR / 'index.json', 'w', encoding='utf-8') as f:

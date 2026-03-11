@@ -33,87 +33,67 @@
         </div>
     </header>
 
-    <!-- 研究报告头部 -->
-    <section class="research-hero">
+    <!-- Hero：渐隐渐显背景轮播 -->
+    <section class="research-hero" id="researchHero">
+        <div class="hero-slides" id="heroSlides">
+            <div class="hero-slide active" style="background-image:url('research/images/hero-data-01.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('research/images/hero-security-01.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('research/images/hero-ai-01.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('research/images/hero-circuit-01.jpg')"></div>
+            <div class="hero-slide" style="background-image:url('research/images/hero-code-01.jpg')"></div>
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-eyebrow">Chatchat Technology Research</p>
+            <h1 class="hero-title">行业研究</h1>
+            <p class="hero-desc">聚焦数据要素、隐私计算、数据安全与人工智能前沿<br>为产业发展提供深度洞察与决策参考</p>
+        </div>
+    </section>
+
+    <!-- 推荐文章 -->
+    <section class="featured-section" id="featuredSection">
         <div class="container">
-            <h1 class="research-hero-title">行业研究</h1>
-            <p class="research-hero-desc">聚焦数据要素、隐私计算、数据安全与人工智能前沿领域，为产业发展提供深度洞察与决策参考</p>
-            <div class="research-stats">
-                <div class="research-stat">
-                    <span class="research-stat-num" id="statTotal">50</span>
-                    <span class="research-stat-label">研究报告</span>
-                </div>
-                <div class="research-stat">
-                    <span class="research-stat-num">4</span>
-                    <span class="research-stat-label">研究领域</span>
-                </div>
-                <div class="research-stat">
-                    <span class="research-stat-num">2023-2026</span>
-                    <span class="research-stat-label">时间跨度</span>
-                </div>
+            <div class="featured-card" id="featuredCard">
+                <!-- JS 动态填充 -->
             </div>
         </div>
     </section>
 
-    <!-- 筛选栏 -->
-    <section class="research-filters">
+    <!-- 筛选 -->
+    <section class="research-filters" id="filtersBar">
         <div class="container">
             <div class="filter-bar">
-                <div class="filter-group">
-                    <label class="filter-label">研究领域</label>
-                    <div class="filter-tags" id="domainFilters">
-                        <button class="filter-tag active" data-domain="all">全部</button>
-                        <button class="filter-tag" data-domain="数据要素">数据要素</button>
-                        <button class="filter-tag" data-domain="隐私计算">隐私计算</button>
-                        <button class="filter-tag" data-domain="数据安全">数据安全</button>
-                        <button class="filter-tag" data-domain="人工智能">人工智能</button>
-                    </div>
+                <div class="filter-tabs" id="domainFilters">
+                    <button class="filter-tab active" data-domain="all">全部</button>
+                    <button class="filter-tab" data-domain="数据要素">数据要素</button>
+                    <button class="filter-tab" data-domain="隐私计算">隐私计算</button>
+                    <button class="filter-tab" data-domain="数据安全">数据安全</button>
+                    <button class="filter-tab" data-domain="人工智能">人工智能</button>
                 </div>
-                <div class="filter-group">
-                    <label class="filter-label">时间范围</label>
-                    <div class="filter-tags" id="yearFilters">
-                        <button class="filter-tag active" data-year="all">全部</button>
-                        <button class="filter-tag" data-year="2023">2023</button>
-                        <button class="filter-tag" data-year="2024">2024</button>
-                        <button class="filter-tag" data-year="2025">2025</button>
-                        <button class="filter-tag" data-year="2026">2026</button>
-                    </div>
-                </div>
-                <div class="filter-group filter-search">
-                    <input type="text" class="filter-input" id="searchInput" placeholder="搜索报告标题或关键词...">
-                </div>
-            </div>
-            <div class="filter-result">
-                <span id="resultCount">加载中...</span>
-                <div class="view-toggle">
-                    <button class="view-btn active" id="gridViewBtn" title="网格视图">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><rect x="1" y="1" width="7" height="7" rx="1"/><rect x="10" y="1" width="7" height="7" rx="1"/><rect x="1" y="10" width="7" height="7" rx="1"/><rect x="10" y="10" width="7" height="7" rx="1"/></svg>
-                    </button>
-                    <button class="view-btn" id="listViewBtn" title="列表视图">
-                        <svg width="18" height="18" viewBox="0 0 18 18" fill="currentColor"><rect x="1" y="2" width="16" height="3" rx="1"/><rect x="1" y="7.5" width="16" height="3" rx="1"/><rect x="1" y="13" width="16" height="3" rx="1"/></svg>
-                    </button>
+                <div class="filter-right">
+                    <input type="text" class="filter-input" id="searchInput" placeholder="搜索...">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 报告列表 -->
+    <!-- 文章列表 -->
     <section class="research-list">
         <div class="container">
-            <div class="articles-grid" id="articlesGrid">
-                <!-- 动态填充 -->
-            </div>
+            <div class="articles-grid" id="articlesGrid"></div>
             <div class="articles-empty" id="articlesEmpty" style="display:none;">
                 <p>未找到符合条件的研究报告</p>
             </div>
+            <div class="pagination" id="pagination"></div>
         </div>
     </section>
 
-    <!-- Three.js 可视化 -->
+    <!-- Three.js 知识图谱 -->
     <section class="research-viz" id="researchViz">
         <div class="container">
-            <h2 class="section-title">研究领域知识图谱</h2>
-            <p class="section-desc">基于关键词关联的研究方向可视化分析</p>
+            <p class="viz-eyebrow">Knowledge Graph</p>
+            <h2 class="viz-title">研究领域知识图谱</h2>
+            <p class="viz-desc">基于关键词关联的研究方向可视化</p>
             <div class="viz-container" id="vizContainer"></div>
         </div>
     </section>
@@ -143,8 +123,7 @@
         </div>
     </footer>
 
-    <!-- Three.js -->
-    <script src="https://cdn.jsdelivr.net/npm/three@0.162.0/build/three.min.js"></script>
+    <script src="js/three.min.js"></script>
     <script src="js/dotmatrix.js"></script>
     <script src="js/research.js"></script>
 </body>
