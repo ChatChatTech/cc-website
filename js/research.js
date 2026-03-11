@@ -124,55 +124,13 @@
   /* ============================================================
      Article Modal
      ============================================================ */
-  var modal = document.getElementById('articleModal');
-  var modalBody = document.getElementById('modalBody');
 
   grid.addEventListener('click', function (e) {
     var card = e.target.closest('.article-card');
     if (!card) return;
-    openArticle(card.getAttribute('data-filename'));
+    var filename = card.getAttribute('data-filename');
+    window.location.href = 'research/' + filename;
   });
-
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  document.getElementById('modalOverlay').addEventListener('click', closeModal);
-  document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape') closeModal();
-  });
-
-  async function openArticle(filename) {
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
-    modalBody.innerHTML = '<p style="text-align:center;padding:40px;color:#86909C;">加载中...</p>';
-
-    try {
-      var resp = await fetch('research/' + filename);
-      var text = await resp.text();
-
-      // Strip YAML frontmatter
-      var content = text;
-      if (content.startsWith('---')) {
-        var endIdx = content.indexOf('---', 3);
-        if (endIdx > 0) {
-          content = content.substring(endIdx + 3).trim();
-        }
-      }
-
-      // Render markdown
-      if (typeof marked !== 'undefined') {
-        modalBody.innerHTML = marked.parse(content);
-      } else {
-        modalBody.innerHTML = '<pre style="white-space:pre-wrap;">' + escapeHtml(content) + '</pre>';
-      }
-    } catch (e) {
-      modalBody.innerHTML = '<p style="text-align:center;padding:40px;color:#F53F3F;">加载失败</p>';
-    }
-  }
-
-  function closeModal() {
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    modalBody.innerHTML = '';
-  }
 
   /* ============================================================
      Header scroll effect & mobile menu (same as main page)
