@@ -1,13 +1,16 @@
 #!/usr/bin/env python3
 """
-行业研究报告生成器 v2
-生成50篇独立HTML页面的行业调研报告（Medium/WSJ风格）
+行业研究报告生成器 v3
+生成80篇独立HTML页面的行业调研报告（Medium/WSJ风格）
 每篇包含丰富的图表、表格、统计卡片与高亮框
+图表数据一致性：相同标题的图表在不同文章中使用相同数据
+每篇文章拥有唯一的Hero背景图
 """
 
 import os
 import json
 import random
+import hashlib
 import html as html_mod
 from pathlib import Path
 
@@ -37,22 +40,103 @@ RESEARCH_DIR = BASE_DIR / 'research'
 CHARTS_DIR = RESEARCH_DIR / 'charts'
 
 # ============================================================
-# Hero 背景图映射
+# 图表数据一致性：相同标题 → 相同种子 → 相同数据
+# ============================================================
+def _chart_seed(title):
+    """确保同一标题的图表在所有文章中产生相同的随机数据"""
+    return int(hashlib.md5(title.encode()).hexdigest()[:8], 16)
+
+# ============================================================
+# Hero 背景图：每篇文章唯一映射（1:1）
 # ============================================================
 ALL_HERO_IMAGES = [
-    'images/hero-ai-01.jpg', 'images/hero-binary-01.jpg', 'images/hero-circuit-01.jpg',
-    'images/hero-cloud-01.jpg', 'images/hero-code-01.jpg', 'images/hero-code-02.jpg',
-    'images/hero-code-03.jpg', 'images/hero-data-01.jpg', 'images/hero-data-02.jpg',
-    'images/hero-digital-01.jpg', 'images/hero-digital-02.jpg', 'images/hero-network-01.jpg',
-    'images/hero-security-01.jpg', 'images/hero-security-02.jpg', 'images/hero-security-03.jpg',
-    'images/hero-server-01.jpg', 'images/hero-tech-01.jpg', 'images/hero-tech-02.jpg',
-    'images/hero-tech-03.jpg', 'images/hero-tech-04.jpg',
+    'images/hero-ai-01.jpg',
+    'images/hero-binary-01.jpg',
+    'images/hero-circuit-01.jpg',
+    'images/hero-cloud-01.jpg',
+    'images/hero-code-01.jpg',
+    'images/hero-code-02.jpg',
+    'images/hero-code-03.jpg',
+    'images/hero-data-01.jpg',
+    'images/hero-data-02.jpg',
+    'images/hero-digital-01.jpg',
+    'images/hero-digital-02.jpg',
+    'images/hero-network-01.jpg',
+    'images/hero-security-01.jpg',
+    'images/hero-security-02.jpg',
+    'images/hero-security-03.jpg',
+    'images/hero-server-01.jpg',
+    'images/hero-tech-01.jpg',
+    'images/hero-tech-02.jpg',
+    'images/hero-tech-03.jpg',
+    'images/hero-tech-04.jpg',
+    'images/hero-cyber-01.jpg',
+    'images/hero-server-02.jpg',
+    'images/hero-matrix-01.jpg',
+    'images/hero-dev-01.jpg',
+    'images/hero-abstract-01.jpg',
+    'images/hero-code-04.jpg',
+    'images/hero-laptop-01.jpg',
+    'images/hero-chip-01.jpg',
+    'images/hero-globe-01.jpg',
+    'images/hero-code-05.jpg',
+    'images/hero-lock-01.jpg',
+    'images/hero-robot-01.jpg',
+    'images/hero-teamwork-01.jpg',
+    'images/hero-dashboard-01.jpg',
+    'images/hero-monitor-01.jpg',
+    'images/hero-code-06.jpg',
+    'images/hero-screen-01.jpg',
+    'images/hero-retro-01.jpg',
+    'images/hero-wire-01.jpg',
+    'images/hero-dark-01.jpg',
+    'images/hero-ai-02.jpg',
+    'images/hero-lab-01.jpg',
+    'images/hero-humanoid-01.jpg',
+    'images/hero-purple-01.jpg',
+    'images/hero-face-01.jpg',
+    'images/hero-display-01.jpg',
+    'images/hero-terminal-01.jpg',
+    'images/hero-keyboard-01.jpg',
+    'images/hero-circuit-02.jpg',
+    'images/hero-quantum-01.jpg',
+    'images/hero-react-01.jpg',
+    'images/hero-blockchain-01.jpg',
+    'images/hero-ai-03.jpg',
+    'images/hero-drone-01.jpg',
+    'images/hero-neon-01.jpg',
+    'images/hero-smoke-01.jpg',
+    'images/hero-dark-02.jpg',
+    'images/hero-finance-01.jpg',
+    'images/hero-study-01.jpg',
+    'images/hero-chart-01.jpg',
+    'images/hero-lab-02.jpg',
+    'images/hero-hand-01.jpg',
+    'images/hero-space-01.jpg',
+    'images/hero-earth-01.jpg',
+    'images/hero-office-01.jpg',
+    'images/hero-team-02.jpg',
+    'images/hero-science-01.jpg',
+    'images/hero-man-01.jpg',
+    'images/hero-vr-01.jpg',
+    'images/hero-water-01.jpg',
+    'images/hero-green-01.jpg',
+    'images/hero-blue-01.jpg',
+    'images/hero-ai-04.jpg',
+    'images/hero-meeting-01.jpg',
+    'images/hero-wave-01.jpg',
+    'images/hero-hologram-01.jpg',
+    'images/hero-city-01.jpg',
+    'images/hero-skyline-01.jpg',
+    'images/hero-python-01.jpg',
+    'images/hero-space-02.jpg',
 ]
 
 # ============================================================
-# 50篇文章定义
+# 80篇文章定义（50旧 + 30新）
 # ============================================================
 ARTICLES = [
+    # --- 原50篇 ---
     {"date": "2023-03-08", "domain": "数据要素", "keywords": ["数据确权", "数据资产", "产权制度"], "title": "数据要素市场化配置中的确权机制研究", "subtitle": "从产权界定到价值释放的制度路径"},
     {"date": "2023-03-22", "domain": "隐私计算", "keywords": ["联邦学习", "多方安全计算", "技术选型"], "title": "隐私计算技术路线对比与选型分析", "subtitle": "联邦学习、MPC与TEE的适用场景评估"},
     {"date": "2023-04-15", "domain": "人工智能", "keywords": ["大模型", "GPT", "产业影响"], "title": "大语言模型对企业数字化转型的影响评估", "subtitle": "从GPT到行业大模型的演进路径"},
@@ -103,9 +187,40 @@ ARTICLES = [
     {"date": "2025-11-20", "domain": "隐私计算", "keywords": ["隐私计算标准", "互联互通", "行业标准"], "title": "隐私计算互联互通标准进展与产业影响", "subtitle": "跨平台协作的技术标准与生态建设"},
     {"date": "2026-01-15", "domain": "数据安全", "keywords": ["二进制安全", "恶意检测", "模型安全"], "title": "二进制级深度安全检测在模型部署中的实践", "subtitle": "ClamAV、YARA与ModelScan联合检测方案"},
     {"date": "2026-02-28", "domain": "数据要素", "keywords": ["数据要素", "2026展望", "政策趋势"], "title": "2026年数据要素市场发展趋势与政策展望", "subtitle": "从制度建设到规模化流通的关键转折"},
+    # --- 新增30篇（2026-04 至 2028-12）---
+    {"date": "2026-04-10", "domain": "人工智能", "keywords": ["OpenClaw", "开源AI", "法律智能"], "title": "OpenClaw开源法律AI平台技术架构与生态分析", "subtitle": "基于大语言模型的法律智能开源实践"},
+    {"date": "2026-05-18", "domain": "数据安全", "keywords": ["AI数据安全", "模型隐私", "训练数据"], "title": "AI训练数据安全合规与隐私保护机制研究", "subtitle": "从数据采集到模型发布的全链路安全治理"},
+    {"date": "2026-06-22", "domain": "隐私计算", "keywords": ["联邦学习", "大模型训练", "分布式隐私"], "title": "联邦学习在大模型分布式训练中的最新进展", "subtitle": "数据不出域条件下的大规模参数同步方案"},
+    {"date": "2026-07-30", "domain": "数据要素", "keywords": ["新质生产力", "数据驱动", "产业升级"], "title": "新质生产力与数据要素驱动的产业升级路径", "subtitle": "十五五规划下数据要素赋能实体经济"},
+    {"date": "2026-08-15", "domain": "人工智能", "keywords": ["AI+产业融合", "智能制造", "工业大模型"], "title": "AI+产业融合趋势与工业大模型应用前景", "subtitle": "人工智能赋能新型工业化的技术路径"},
+    {"date": "2026-09-25", "domain": "数据安全", "keywords": ["低空经济", "无人机数据", "空域安全"], "title": "低空经济数据安全治理框架与政策建议", "subtitle": "无人机数据采集、传输与存储的安全机制"},
+    {"date": "2026-10-20", "domain": "隐私计算", "keywords": ["同态加密", "FHE", "GPU加速"], "title": "全同态加密GPU加速方案与工程化瓶颈突破", "subtitle": "基于CUDA/ROCm的FHE密文运算性能优化"},
+    {"date": "2026-11-12", "domain": "数据要素", "keywords": ["绿色发展", "碳数据", "ESG"], "title": "绿色发展框架下碳数据资产交易机制研究", "subtitle": "ESG数据治理标准与碳配额数据安全流通"},
+    {"date": "2026-12-08", "domain": "人工智能", "keywords": ["DeepSeek", "MoE架构", "开源生态"], "title": "DeepSeek系列模型技术演进与行业影响评估", "subtitle": "MoE架构创新、训练效率优化与开源生态构建"},
+    {"date": "2027-01-20", "domain": "数据安全", "keywords": ["跨境支付", "金融数据安全", "SWIFT"], "title": "跨境支付数据安全与隐私合规国际比较", "subtitle": "SWIFT替代方案与数字货币跨境数据流动机制"},
+    {"date": "2027-02-15", "domain": "隐私计算", "keywords": ["零知识证明", "ZKP", "区块链隐私"], "title": "零知识证明在隐私保护数据验证中的应用", "subtitle": "zk-SNARKs与zk-STARKs工程实践与性能对比"},
+    {"date": "2027-03-18", "domain": "数据要素", "keywords": ["人口数据", "老龄化", "精准服务"], "title": "人口结构变化下的数据要素精准服务机制", "subtitle": "老龄化社会养老、医疗与社保数据协同"},
+    {"date": "2027-04-22", "domain": "人工智能", "keywords": ["AGI", "通用人工智能", "安全对齐"], "title": "通用人工智能安全对齐研究进展与挑战", "subtitle": "从RLHF到Constitutional AI的安全范式演进"},
+    {"date": "2027-05-10", "domain": "数据安全", "keywords": ["智慧城市", "城市数据", "数据安全"], "title": "智慧城市数据安全治理架构与实施路径", "subtitle": "城市级数据中台的安全基线与隐私保护"},
+    {"date": "2027-06-25", "domain": "隐私计算", "keywords": ["隐私计算", "AI推理", "模型即服务"], "title": "隐私保护AI推理服务的技术方案与商业模式", "subtitle": "模型即服务场景下的数据安全解决方案"},
+    {"date": "2027-07-15", "domain": "数据要素", "keywords": ["现代产业体系", "数字供应链", "产业链安全"], "title": "现代产业体系中数据要素的核心枢纽作用", "subtitle": "数字供应链安全与产业链数据协同创新"},
+    {"date": "2027-08-20", "domain": "人工智能", "keywords": ["量子计算", "量子AI", "量子优势"], "title": "量子计算与人工智能融合发展前沿研究", "subtitle": "量子机器学习算法在安全与优化中的应用"},
+    {"date": "2027-09-12", "domain": "数据安全", "keywords": ["生物数据", "基因安全", "生物信息"], "title": "生物数据安全保护体系与国际监管比较", "subtitle": "基因组数据的存储加密与跨境流动管控"},
+    {"date": "2027-10-28", "domain": "隐私计算", "keywords": ["可验证计算", "计算完整性", "远程证明"], "title": "可验证计算在安全外包中的关键技术进展", "subtitle": "计算完整性证明与远程证明协议优化"},
+    {"date": "2027-11-15", "domain": "数据要素", "keywords": ["数据主权", "数字治理", "国际竞争"], "title": "数据主权背景下的全球数字治理竞争态势", "subtitle": "中美欧数据治理模式差异与战略博弈"},
+    {"date": "2027-12-20", "domain": "人工智能", "keywords": ["AI芯片", "国产算力", "芯片安全"], "title": "国产AI芯片产业格局与算力安全评估", "subtitle": "从芯片设计到可信计算栈的自主可控路径"},
+    {"date": "2028-01-25", "domain": "数据安全", "keywords": ["网络韧性", "灾备恢复", "业务连续性"], "title": "数据安全网络韧性体系建设与灾备战略", "subtitle": "关键信息基础设施的业务连续性管理"},
+    {"date": "2028-03-10", "domain": "隐私计算", "keywords": ["隐私计算芯片", "硬件加速", "专用处理器"], "title": "隐私计算专用芯片设计与硬件加速前沿", "subtitle": "ASIC与FPGA在密文运算中的工程化实践"},
+    {"date": "2028-04-18", "domain": "数据要素", "keywords": ["数据要素", "全球化", "数据贸易"], "title": "全球数据要素贸易格局与中国战略定位", "subtitle": "数据跨境流通规则与国际数据市场建设"},
+    {"date": "2028-05-22", "domain": "人工智能", "keywords": ["AI医疗", "精准医疗", "隐私保护"], "title": "AI精准医疗场景下的数据隐私保护实践", "subtitle": "多中心临床数据联合分析的安全架构"},
+    {"date": "2028-07-08", "domain": "数据安全", "keywords": ["数字信任", "信任框架", "可信生态"], "title": "数字信任基础设施建设方案与全球趋势", "subtitle": "从数字身份到可信数据空间的生态架构"},
+    {"date": "2028-08-25", "domain": "隐私计算", "keywords": ["安全多方计算", "区块链", "Web3隐私"], "title": "安全多方计算与Web3隐私基础设施融合", "subtitle": "去中心化场景下的隐私保护技术方案"},
+    {"date": "2028-10-15", "domain": "数据要素", "keywords": ["太空数据", "卫星数据", "遥感安全"], "title": "太空数据经济与卫星遥感数据安全治理", "subtitle": "低轨卫星通信数据的主权保护与商业流通"},
+    {"date": "2028-11-20", "domain": "人工智能", "keywords": ["超级智能", "AI安全", "全球治理"], "title": "超级智能风险评估与全球AI安全治理框架", "subtitle": "从前沿模型评测到国际协调机制建设"},
+    {"date": "2028-12-28", "domain": "数据安全", "keywords": ["2029展望", "数据安全趋势", "技术预测"], "title": "2029年数据安全技术与产业趋势前瞻", "subtitle": "后量子时代的安全架构演进与市场格局"},
 ]
 
-assert len(ARTICLES) == 50
+assert len(ARTICLES) == 80
 
 # ============================================================
 # 图表生成函数
@@ -220,70 +335,139 @@ def gen_hbar(fn, title, cats, vals, xlabel=''):
 # 为每篇文章生成 3-6 张图表
 # ============================================================
 def generate_charts(idx, article):
-    random.seed(idx * 42 + 7); np.random.seed(idx * 42 + 7)
+    """生成图表。
+    关键改进：使用 _chart_seed(title) 保证同一标题图表数据一致。
+    新增文章(idx >= 50)仅生成1-2张图表。
+    """
     charts = []
     pf = f'chart_{idx+1:03d}'
     dom = article['domain']; yr = int(article['date'][:4])
+    is_new = idx >= 50  # 新增30篇仅1-2张图
 
-    # 1) 趋势折线图
-    f1 = f'{pf}_trend.png'; yrs = [str(y) for y in range(2020, yr+2)]
-    gen_line(str(CHARTS_DIR/f1), f'{dom}市场规模增长趋势', yrs,
+    # 1) 趋势折线图 — 每个domain只有一套趋势数据
+    title1 = f'{dom}市场规模增长趋势'
+    seed1 = _chart_seed(title1)
+    random.seed(seed1); np.random.seed(seed1)
+    f1 = f'{pf}_trend.png'
+    # 统一使用2020-2028的数据范围
+    yrs = [str(y) for y in range(2020, 2029)]
+    gen_line(str(CHARTS_DIR/f1), title1, yrs,
              {'市场规模(亿元)': [random.uniform(20,50)*(1.3**i) for i in range(len(yrs))],
               '同比增长率(%)': [random.uniform(15,45) for _ in yrs]}, ylabel='规模/增长率')
     charts.append(f1)
 
+    if is_new:
+        # 新文章：仅再生成1张变体图表
+        vt = idx % 5
+        title_v = {
+            0: f'{dom}行业需求热力矩阵',
+            1: f'{dom}投资分布趋势',
+            2: f'{dom}平台能力评估',
+            3: f'{dom}方案性能对比',
+            4: f'{dom}解决方案综合评估',
+        }[vt]
+        seed_v = _chart_seed(title_v)
+        random.seed(seed_v); np.random.seed(seed_v)
+        f4 = f'{pf}_variant.png'
+        if vt == 0:
+            gen_heatmap(str(CHARTS_DIR/f4), title_v,
+                        ['安全性','性能','易用性','成本','合规度'], ['金融','医疗','政务','能源'],
+                        np.array([[random.uniform(3,10) for _ in range(4)] for _ in range(5)]))
+        elif vt == 1:
+            y4 = [str(y) for y in range(2021, 2029)]
+            gen_area(str(CHARTS_DIR/f4), title_v, y4,
+                     {'政府投资':[random.uniform(10,30)*(1.2**i) for i in range(len(y4))],
+                      '企业投资':[random.uniform(15,40)*(1.25**i) for i in range(len(y4))],
+                      '风险投资':[random.uniform(5,20)*(1.3**i) for i in range(len(y4))]}, ylabel='亿元')
+        elif vt == 2:
+            gen_scatter(str(CHARTS_DIR/f4), title_v,
+                        [random.uniform(40,95) for _ in range(8)],
+                        [random.uniform(40,95) for _ in range(8)],
+                        labels=[f'厂商{chr(65+i)}' for i in range(8)],
+                        xlabel='技术成熟度', ylabel='市场覆盖度')
+        elif vt == 3:
+            gen_violin(str(CHARTS_DIR/f4), title_v,
+                       ['方案A','方案B','方案C','方案D'],
+                       [np.random.normal(random.uniform(50,80), random.uniform(5,15), 50) for _ in range(4)])
+        else:
+            gen_radar(str(CHARTS_DIR/f4), title_v,
+                      ['安全性','性能','易用性','扩展性','合规性','成本效益'],
+                      [random.uniform(5,10) for _ in range(6)])
+        charts.append(f4)
+        return charts
+
+    # 原50篇：保持3-6张图表
     # 2) 行业分布柱状图
+    title2 = f'{dom}行业应用投入分布'
+    seed2 = _chart_seed(title2)
+    random.seed(seed2); np.random.seed(seed2)
     f2 = f'{pf}_industry.png'; cs = ['金融','医疗','政务','能源','交通','制造']
-    gen_bar(str(CHARTS_DIR/f2), f'{dom}行业应用投入分布', cs,
+    gen_bar(str(CHARTS_DIR/f2), title2, cs,
             [random.randint(15,95) for _ in cs], ylabel='投入占比(%)')
     charts.append(f2)
 
     # 3) 饼图
+    title3 = f'{dom}技术路线市场份额'
+    seed3 = _chart_seed(title3)
+    random.seed(seed3); np.random.seed(seed3)
     f3 = f'{pf}_share.png'
     tl = {'数据要素':['数据采集','数据治理','数据交易','数据安全','数据分析'],
           '隐私计算':['联邦学习','安全多方计算','可信执行环境','差分隐私','同态加密'],
           '数据安全':['加密技术','访问控制','审计监控','脱敏脱标','漏洞防护'],
           '人工智能':['大语言模型','计算机视觉','语音识别','知识图谱','强化学习']}
-    gen_pie(str(CHARTS_DIR/f3), f'{dom}技术路线市场份额',
+    gen_pie(str(CHARTS_DIR/f3), title3,
             tl.get(dom, tl['数据要素']), [random.randint(10,40) for _ in range(5)])
     charts.append(f3)
 
     # 4) 变体图表
     vt = idx % 5
+    title_map = {
+        0: f'{dom}行业需求热力矩阵',
+        1: f'{dom}投资分布趋势',
+        2: f'{dom}平台能力评估',
+        3: f'{dom}方案性能对比',
+        4: f'{dom}解决方案综合评估',
+    }
+    title4 = title_map[vt]
+    seed4 = _chart_seed(title4)
+    random.seed(seed4); np.random.seed(seed4)
     if vt == 0:
         f4 = f'{pf}_heatmap.png'
-        gen_heatmap(str(CHARTS_DIR/f4), f'{dom}行业需求热力矩阵',
+        gen_heatmap(str(CHARTS_DIR/f4), title4,
                     ['安全性','性能','易用性','成本','合规度'], ['金融','医疗','政务','能源'],
                     np.array([[random.uniform(3,10) for _ in range(4)] for _ in range(5)]))
     elif vt == 1:
-        f4 = f'{pf}_area.png'; y4 = [str(y) for y in range(2021, yr+2)]
-        gen_area(str(CHARTS_DIR/f4), f'{dom}投资分布趋势', y4,
+        f4 = f'{pf}_area.png'; y4 = [str(y) for y in range(2021, 2029)]
+        gen_area(str(CHARTS_DIR/f4), title4, y4,
                  {'政府投资':[random.uniform(10,30)*(1.2**i) for i in range(len(y4))],
                   '企业投资':[random.uniform(15,40)*(1.25**i) for i in range(len(y4))],
                   '风险投资':[random.uniform(5,20)*(1.3**i) for i in range(len(y4))]}, ylabel='亿元')
     elif vt == 2:
         f4 = f'{pf}_scatter.png'
-        gen_scatter(str(CHARTS_DIR/f4), f'{dom}平台能力评估',
+        gen_scatter(str(CHARTS_DIR/f4), title4,
                     [random.uniform(40,95) for _ in range(8)],
                     [random.uniform(40,95) for _ in range(8)],
                     labels=[f'厂商{chr(65+i)}' for i in range(8)],
                     xlabel='技术成熟度', ylabel='市场覆盖度')
     elif vt == 3:
         f4 = f'{pf}_violin.png'
-        gen_violin(str(CHARTS_DIR/f4), f'{dom}方案性能对比',
+        gen_violin(str(CHARTS_DIR/f4), title4,
                    ['方案A','方案B','方案C','方案D'],
                    [np.random.normal(random.uniform(50,80), random.uniform(5,15), 50) for _ in range(4)])
     else:
         f4 = f'{pf}_radar.png'
-        gen_radar(str(CHARTS_DIR/f4), f'{dom}解决方案综合评估',
+        gen_radar(str(CHARTS_DIR/f4), title4,
                   ['安全性','性能','易用性','扩展性','合规性','成本效益'],
                   [random.uniform(5,10) for _ in range(6)])
     charts.append(f4)
 
     # 5) 分组柱状图 (50%)
     if idx % 2 == 0:
-        f5 = f'{pf}_grouped.png'; y5 = [str(y) for y in range(yr-2, yr+1)]
-        gen_grouped_bar(str(CHARTS_DIR/f5), f'{dom}分领域发展对比', y5,
+        title5 = f'{dom}分领域发展对比'
+        seed5 = _chart_seed(title5)
+        random.seed(seed5); np.random.seed(seed5)
+        f5 = f'{pf}_grouped.png'; y5 = [str(y) for y in range(2024, 2029)]
+        gen_grouped_bar(str(CHARTS_DIR/f5), title5, y5,
                         {'技术研发':[random.randint(20,80) for _ in y5],
                          '产品落地':[random.randint(15,70) for _ in y5],
                          '标准建设':[random.randint(10,50) for _ in y5]}, ylabel='指数')
@@ -291,8 +475,11 @@ def generate_charts(idx, article):
 
     # 6) 水平柱状图 (33%)
     if idx % 3 == 0:
+        title6 = f'{dom}重点任务优先级'
+        seed6 = _chart_seed(title6)
+        random.seed(seed6); np.random.seed(seed6)
         f6 = f'{pf}_hbar.png'
-        gen_hbar(str(CHARTS_DIR/f6), f'{dom}重点任务优先级',
+        gen_hbar(str(CHARTS_DIR/f6), title6,
                  ['数据治理','安全合规','技术研发','人才建设','标准制定','生态建设','场景拓展'],
                  [random.randint(30,100) for _ in range(7)], xlabel='优先级指数')
         charts.append(f6)
@@ -389,7 +576,8 @@ def generate_body(idx, article, charts):
 <p>据行业研究机构统计，{yr}年中国{dom}市场规模达到约{ms}亿元，同比增长{gr}%。其中，金融行业仍是最大的应用市场，占比约{fp}%；政务领域增速最快，年增长率超过{gg}%。</p>
 <p>从区域分布看，长三角、京津冀和粤港澳大湾区是三大核心市场，合计占全国市场份额的{rp}%以上。</p>''')
 
-    p.append(fig_html(f'charts/{charts[1]}', f'图2: {dom}行业应用投入分布'))
+    if len(charts) > 1:
+        p.append(fig_html(f'charts/{charts[1]}', f'图2: {dom}行业应用投入分布'))
 
     p.append(table(['区域','市场占比','增速','代表城市'],
                     [['长三角',f'{random.randint(25,35)}%',f'{random.randint(30,55)}%','上海、杭州、南京'],
@@ -405,7 +593,8 @@ def generate_body(idx, article, charts):
 <p><strong>标准化进程加速</strong>：行业标准的制定与发布明显提速，国家标准、行业标准与团体标准形成多层次的标准体系，为技术互联互通与产品评测认证提供了依据。</p>
 <p><strong>开源生态活跃</strong>：国内外开源社区持续贡献高质量的技术实现，降低了技术门槛，加速了创新扩散。</p>''')
 
-    p.append(fig_html(f'charts/{charts[2]}', f'图3: {dom}技术路线市场份额'))
+    if len(charts) > 2:
+        p.append(fig_html(f'charts/{charts[2]}', f'图3: {dom}技术路线市场份额'))
 
     p.append('<h3>3.2 关键技术指标</h3>')
     p.append(table(['指标维度','当前水平','发展趋势'],
@@ -417,7 +606,8 @@ def generate_body(idx, article, charts):
 
     p.append(stat_row([(f'{pt}秒','千万级处理'),(kb,'安全强度'),(f'{cr}%','成本降低'),(f'{vp}%','可视化覆盖')]))
 
-    p.append(fig_html(f'charts/{charts[3]}', f'图4: {dom}多维度分析'))
+    if len(charts) > 3:
+        p.append(fig_html(f'charts/{charts[3]}', f'图4: {dom}多维度分析'))
 
     # 第四章
     p.append(f'''<h2>四、典型应用场景与实践</h2>
@@ -491,8 +681,8 @@ def generate_body(idx, article, charts):
 def build_html(idx, article, charts, body_html):
     d = article
     slug = f'{d["date"].replace("-","")}-{idx+1:03d}'
-    random.seed(idx * 73 + 31)
-    hero_img = random.choice(ALL_HERO_IMAGES)
+    # 1:1 唯一映射：每篇文章对应唯一Hero图片，不使用random
+    hero_img = ALL_HERO_IMAGES[idx]
     read_min = max(5, len(body_html) // 800)
 
     # Related articles
@@ -578,7 +768,7 @@ def build_html(idx, article, charts, body_html):
 <div style="font-size:0.85rem;color:#86909C;"><a href="mailto:ink@chatchat.space" style="color:#86909C;text-decoration:none;">ink@chatchat.space</a></div>
 </div>
 <div class="footer-bottom" style="text-align:center;padding:16px 0;border-top:1px solid rgba(255,255,255,0.08);font-size:0.8rem;color:#4E5969;">
-<p>&copy; 2024-2026 Chatchat Technology 查特查特科技有限公司. All rights reserved.</p>
+<p>&copy; 2024-2028 Chatchat Technology 查特查特科技有限公司. All rights reserved.</p>
 </div>
 </div>
 </footer>
@@ -612,7 +802,7 @@ def main():
     meta = []
 
     for idx, art in enumerate(ARTICLES):
-        print(f'[{idx+1:02d}/50] {art["title"]}')
+        print(f'[{idx+1:02d}/80] {art["title"]}')
         charts = generate_charts(idx, art)
         _, body = generate_body(idx, art, charts)
         slug = f'{art["date"].replace("-","")}-{idx+1:03d}'
@@ -630,7 +820,7 @@ def main():
     with open(RESEARCH_DIR / 'index.json', 'w', encoding='utf-8') as f:
         json.dump(meta, f, ensure_ascii=False, indent=2)
 
-    print(f'\n✓ 已生成 {len(meta)} 篇 HTML 研究报告')
+    print(f'\n✓ 已生成 {len(meta)} 篇 HTML 研究报告（包含未来预发布文章）')
     print(f'  图表: {CHARTS_DIR}')
     print(f'  报告: {RESEARCH_DIR}')
 

@@ -47,7 +47,8 @@
      Featured article — latest article, half-screen style
      ============================================================ */
   function renderFeatured() {
-    var sorted = articles.slice().sort(function (a, b) { return b.date.localeCompare(a.date); });
+    var today = new Date().toISOString().slice(0, 10);
+    var sorted = articles.filter(function (a) { return a.date <= today; }).sort(function (a, b) { return b.date.localeCompare(a.date); });
     var f = sorted[0];
     if (!f) return;
     var img = f.hero_image ? ('research/' + f.hero_image) : 'research/images/hero-data-01.jpg';
@@ -75,7 +76,10 @@
      Filtering & pagination
      ============================================================ */
   function getFiltered() {
+    var today = new Date().toISOString().slice(0, 10);
     return articles.filter(function (a) {
+      // 按系统时间过滤：只显示发布日期 <= 当天的文章
+      if (a.date > today) return false;
       if (activeDomain !== 'all' && a.domain !== activeDomain) return false;
       if (searchQuery) {
         var q = searchQuery.toLowerCase();
