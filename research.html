@@ -100,7 +100,14 @@
     </section>
 
     <!-- 页脚 -->
-    <footer class="footer">
+    <style>
+.article-card-image{position:relative;overflow:hidden}
+.article-card-image::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(22,93,255,.55),rgba(22,93,255,.25));z-index:1;transition:opacity .3s;pointer-events:none}
+.article-card-image::after{background:linear-gradient(to bottom,transparent 40%,rgba(22,93,255,.15))!important;z-index:2;transition:all .3s}
+.article-card:hover .article-card-image::before{opacity:0}
+.article-card:hover .article-card-image::after{background:radial-gradient(circle 2px,rgba(22,93,255,.3) 1px,transparent 1px)!important;background-size:12px 12px!important;transform:rotate(-15deg) scale(1.4);opacity:1}
+</style>
+<footer class="footer">
         <div class="container">
             <div class="footer-inner">
                 <div class="footer-brand">
@@ -119,7 +126,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024-2026 Chatchat Technology 查特查特科技有限公司. All rights reserved.</p>
+                <p>&copy; 2024-2026 Chatchat Technology (HK) Limited. All rights reserved.</p>
             </div>
         </div>
     </footer>
