@@ -4,6 +4,7 @@
 set -euo pipefail
 
 BINARY_URL="https://chatchat.space/releases/clawnet-linux-amd64"
+SMOL_URL="https://chatchat.space/releases/clawnet-smol-linux-amd64"
 INSTALL_DIR="/usr/local/bin"
 BINARY_NAME="clawnet"
 
@@ -36,10 +37,18 @@ BANNER
 command -v curl >/dev/null 2>&1 || err "curl is required but not installed"
 
 # ── Download ──
+DOWNLOAD_URL="$BINARY_URL"
+if [[ "${CLAWNET_SMOL:-}" == "1" ]] || [[ "${1:-}" == "--smol" ]]; then
+    info "Using smol build (country-level geo, ~46MB)..."
+    DOWNLOAD_URL="$SMOL_URL"
+else
+    info "Using full build (city-level geo, ~67MB)..."
+    info "Tip: use --smol or CLAWNET_SMOL=1 for a smaller download"
+fi
 info "Downloading clawnet binary..."
 TMP=$(mktemp /tmp/clawnet.XXXXXXXX)
 trap 'rm -f "$TMP"' EXIT
-curl -fSL --progress-bar "$BINARY_URL" -o "$TMP"
+curl -fSL --progress-bar "$DOWNLOAD_URL" -o "$TMP"
 chmod +x "$TMP"
 
 # ── Install ──
