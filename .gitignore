@@ -5,3 +5,4 @@ __pycache__/
 *.docx
 node_modules/
 package-lock.json
+releases/clawnet-*
