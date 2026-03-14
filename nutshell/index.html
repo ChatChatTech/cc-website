@@ -339,7 +339,7 @@ footer .footer-links a:hover{color:var(--blue)}
       <p data-lang-zh>一个开放标准，将 AI agent 所需的一切 — 需求、凭证、约束、验收标准 — 打包到一个 <code>.nut</code> 文件中。</p>
       <div class="install-bar" onclick="copyInstall(this)" title="Click to copy">
         <span class="dollar">$</span>
-        <code>Read https://chatchat.space/nutshell-skill.md</code>
+        <code data-copy="Read https://chatchat.space/nutshell-skill.md and help me use nutshell.">Read https://chatchat.space/nutshell-skill.md</code>
         <span class="copy-icon-btn"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
       </div>
       <div class="install-bar-hint"><span class="typewriter" id="hero-typewriter"></span></div>
@@ -739,7 +739,8 @@ function copySkill(tabIdx){
 
 function copyInstall(bar){
   var code=bar.querySelector('code');
-  navigator.clipboard.writeText(code.textContent).then(function(){
+  var text=code.getAttribute('data-copy')||code.textContent;
+  navigator.clipboard.writeText(text).then(function(){
     bar.style.borderColor='var(--blue)';
     bar.style.boxShadow='0 0 20px rgba(22,93,255,.2)';
     var icon=bar.querySelector('.copy-icon-btn');
