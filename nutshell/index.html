@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nutshell — Task Packaging for AI Agents</title>
+<meta name="description" content="An open standard and CLI for packaging complete task context into .nut bundles. Harness engineering infrastructure for AI agents.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="nutshell-icon.svg">
+<style>
+:root {
+  --white:#FFFFFF; --bg:#FBFBFA; --border:#E8E8E4;
+  --text:#37352F; --text-secondary:#9B9A97;
+  --blue:#165DFF; --blue-hover:#0D4DD6; --blue-subtle:rgba(22,93,255,0.06);
+  --font-body:'Inter',-apple-system,sans-serif;
+  --font-mono:'JetBrains Mono',Menlo,monospace;
+  --r-sm:4px; --r-md:8px; --r-lg:12px;
+  --ease:all 0.25s cubic-bezier(0.25,1,0.5,1);
+  /* nav dark palette (cc-website) */
+  --nav-bg:rgba(10,10,10,0.92); --nav-foam:#F1FAEE; --nav-foam-dim:rgba(241,250,238,0.6);
+  --red:#E63946; --red-dim:rgba(230,57,70,0.25);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--font-body);background:var(--white);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.2}
+code{font-family:var(--font-mono);font-size:0.85em;background:var(--blue-subtle);color:var(--blue);padding:1px 6px;border-radius:var(--r-sm)}
+.container{max-width:1080px;margin:0 auto;padding:0 2rem}
+section{padding:7rem 0;position:relative}
+a{text-decoration:none;color:inherit}
+.text-blue{color:var(--blue)}
+
+/* i18n */
+[data-lang-zh]{display:none}
+html[lang="zh"] [data-lang-en]{display:none}
+html[lang="zh"] [data-lang-zh]{display:revert}
+
+/* ─── Nav (cc-website dark style) ─── */
+.nav-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--red-dim)}
+.nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px}
+.nav-brand{display:flex;align-items:center;gap:8px;font-size:1.1rem;font-weight:700;color:var(--nav-foam);letter-spacing:-0.02em}
+.nav-brand svg{width:24px;height:24px;flex-shrink:0}
+.nav-brand .logo-shell{color:var(--blue)}
+.nav-links{display:flex;gap:24px;font-size:0.9rem;align-items:center}
+.nav-links a{color:var(--nav-foam-dim);transition:color 0.2s}
+.nav-links a:hover{color:var(--red)}
+.nav-links .btn-sm{background:var(--red);color:#fff;padding:6px 16px;border-radius:6px;font-weight:600;transition:background 0.2s}
+.nav-links .btn-sm:hover{background:#c22e3a;color:#fff}
+.nav-back{font-size:0.82rem;opacity:0.7;transition:opacity 0.2s}
+.nav-back:hover{opacity:1}
+.nav-sep{color:var(--nav-foam-dim);opacity:0.3;font-weight:300}
+.lang-sw{position:relative;display:inline-flex;align-items:center;cursor:pointer;font-size:0.72rem;color:var(--nav-foam-dim);gap:4px;padding:4px 10px;border:1px solid var(--red-dim);border-radius:6px;background:transparent;user-select:none;letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.lang-sw:hover{border-color:var(--red);color:var(--nav-foam)}
+.lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#111;border:1px solid var(--red-dim);border-radius:8px;overflow:hidden;min-width:140px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+.lang-menu.show{display:block}
+.lang-menu a{display:block;padding:8px 16px;color:var(--nav-foam-dim);font-size:0.82rem;white-space:nowrap}
+.lang-menu a:hover{background:var(--red-dim);color:var(--nav-foam)}
+.lang-menu a.active{color:var(--red);font-weight:600}
+
+/* ─── Hero ─── */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:56px;position:relative;overflow:hidden;background:var(--white)}
+.strata-bg{position:absolute;top:0;left:0;width:100%;height:100%;z-index:0;overflow:hidden;background:linear-gradient(180deg,var(--white) 20%,#F4F7FF 100%)}
+.strata-bg svg{position:absolute;bottom:0;left:0;width:100%;min-width:1200px;height:auto;transform-origin:bottom}
+.strata-layer-1{opacity:0.03;transform:translateY(20px) scaleY(1.2)}
+.strata-layer-2{opacity:0.05;transform:translateY(40px) scaleY(0.9)}
+.strata-layer-3{opacity:0.07;transform:translateY(60px) scaleY(0.7)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-content h1{font-size:clamp(2.75rem,4.2vw,4.2rem);margin-bottom:1.25rem;line-height:1.1}
+.hero-content>p{font-size:1.05rem;color:var(--text-secondary);margin-bottom:2rem;max-width:440px;line-height:1.7}
+.hero-actions{display:flex;gap:0.75rem;align-items:center}
+.install-hint{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-secondary);margin-top:1.5rem;padding:0.45rem 0.9rem;background:var(--bg);border-radius:var(--r-sm);border:1px solid var(--border);display:inline-block}
+
+/* Shell animation */
+.encapsulation-visual{position:relative;width:100%;aspect-ratio:1;display:flex;justify-content:center;align-items:center}
+.shell-outer{width:80%;height:80%;border-radius:40% 60% 70% 30%/40% 50% 60% 50%;border:1px solid rgba(22,93,255,0.2);position:absolute;animation:morph 8s ease-in-out infinite alternate;background:linear-gradient(135deg,rgba(244,247,255,0.8) 0%,rgba(255,255,255,0.3) 100%);backdrop-filter:blur(8px);box-shadow:inset 0 0 40px rgba(255,255,255,0.9),0 16px 32px rgba(22,93,255,0.04);z-index:2}
+.shell-inner{width:50%;height:50%;border-radius:50%;background:var(--blue);position:absolute;z-index:3;display:flex;justify-content:center;align-items:center;box-shadow:0 0 48px rgba(22,93,255,0.3)}
+.nut-extension{color:white;font-size:1.4rem;font-weight:600}
+.data-particle{position:absolute;font-family:var(--font-mono);font-size:0.7rem;color:var(--text-secondary);background:var(--white);padding:0.2rem 0.5rem;border-radius:var(--r-sm);border:1px solid var(--border);z-index:1;opacity:0;animation:floatIn 4s infinite linear}
+.dp-1{top:10%;left:20%;animation-delay:0s}
+.dp-2{top:70%;left:10%;animation-delay:1.2s}
+.dp-3{top:20%;right:10%;animation-delay:2.4s}
+.dp-4{bottom:20%;right:20%;animation-delay:3.6s}
+@keyframes morph{0%{border-radius:40% 60% 70% 30%/40% 50% 60% 50%}100%{border-radius:60% 40% 30% 70%/60% 30% 70% 40%}}
+@keyframes floatIn{0%{transform:translate(0,0) scale(0.8);opacity:0}20%{opacity:1}80%{opacity:1}100%{transform:translate(calc(50% - var(--x,0px)),calc(50% - var(--y,0px))) scale(0.5);opacity:0}}
+
+/* ─── Section header ─── */
+.sh{text-align:center;max-width:560px;margin:0 auto 4rem}
+.sh-label{font-size:0.75rem;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue);margin-bottom:0.75rem}
+.sh h2{font-size:2.5rem;margin-bottom:0.75rem}
+.sh p{color:var(--text-secondary);font-size:0.95rem;line-height:1.7}
+
+/* ─── Problem ─── */
+.problem-section{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.problem-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border);border-radius:var(--r-lg);overflow:hidden}
+.problem-card{background:var(--white);padding:2.5rem 2rem}
+.problem-card h3{font-size:1.1rem;margin-bottom:0.5rem}
+.problem-card p{color:var(--text-secondary);font-size:0.875rem;line-height:1.65}
+.pc-line{width:24px;height:2px;background:var(--blue);margin-bottom:1.25rem;border-radius:1px}
+
+/* ─── Harness ─── */
+.harness-section{background:var(--white)}
+.harness-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:start}
+.harness-content h2{font-size:2.4rem;margin-bottom:1rem}
+.harness-content>p{color:var(--text-secondary);font-size:0.95rem;line-height:1.7;margin-bottom:2rem}
+.harness-quote{border-left:2px solid var(--border);padding:0.75rem 0 0.75rem 1.25rem;margin-bottom:1.5rem}
+.harness-quote p{font-style:italic;font-size:0.95rem;color:var(--text);line-height:1.65}
+.harness-quote cite{display:block;font-style:normal;font-size:0.78rem;color:var(--text-secondary);margin-top:0.35rem}
+.harness-note{font-size:0.875rem;color:var(--text-secondary);line-height:1.7}
+.layer-diagram{display:flex;flex-direction:column}
+.layer-ring{border:1px solid var(--border);border-radius:var(--r-lg);padding:1.5rem;background:var(--white);position:relative}
+.layer-ring.outer{background:var(--bg);padding:1.75rem}
+.layer-ring.middle{background:var(--white);margin-top:0.75rem;padding:1.25rem}
+.layer-ring.inner{background:var(--bg);border-color:var(--blue);border-width:1.5px;margin-top:0.75rem}
+.layer-tag{position:absolute;top:-9px;left:16px;font-family:var(--font-mono);font-size:0.68rem;font-weight:500;color:var(--blue);text-transform:uppercase;letter-spacing:0.04em;padding:0 6px}
+.layer-ring.outer .layer-tag{background:var(--bg)}
+.layer-ring.middle .layer-tag{background:var(--white)}
+.layer-ring.inner .layer-tag{background:var(--bg)}
+.layer-code{font-family:var(--font-mono);font-size:0.75rem;color:var(--text);line-height:1.55}
+.layer-code .ck{color:var(--blue)}
+.layer-code .cs{color:#50721B}
+.layer-code .cc{color:var(--text-secondary)}
+
+/* ─── Features ─── */
+.features-section{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.features-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--border);border-radius:var(--r-lg);overflow:hidden}
+.feature-item{background:var(--white);padding:2rem}
+.fi-icon{width:32px;height:32px;border-radius:var(--r-md);background:var(--blue-subtle);display:flex;align-items:center;justify-content:center;margin-bottom:1rem}
+.fi-icon svg{width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.feature-item h3{font-size:1rem;margin-bottom:0.35rem}
+.feature-item p{color:var(--text-secondary);font-size:0.85rem;line-height:1.65}
+
+/* ─── CLI ─── */
+.cli-section{background:var(--white)}
+.terminal{background:#1C1C1E;border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--border);max-width:720px;margin:0 auto}
+.terminal-header{background:#2C2C2E;padding:0.6rem 1rem;display:flex;align-items:center;gap:6px}
+.td{width:10px;height:10px;border-radius:50%}
+.td-r{background:#FF5F57}.td-y{background:#FEBC2E}.td-g{background:#28C840}
+.terminal-body{padding:1.5rem;font-family:var(--font-mono);font-size:0.82rem;line-height:1.9;color:#D1D1D6}
+.prompt::before{content:'$';color:var(--blue);margin-right:0.6rem}
+.cmd{color:#F5F5F7;font-weight:500}
+.flag{color:#86868B}.arg{color:#D1D1D6}.output{color:#86868B}
+.success{color:#30D158}.warn{color:#FFD60A}
+.terminal-body .gap{display:block;height:0.5rem}
+
+/* ─── Skill Install ─── */
+.skill-section{background:var(--white)}
+.skill-box{max-width:680px;margin:0 auto;border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden}
+.skill-box-header{background:var(--bg);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)}
+.skill-box-header span{font-size:0.82rem;font-weight:600;color:var(--text)}
+.copy-btn{font-size:0.72rem;font-weight:500;color:var(--blue);background:var(--white);border:1px solid var(--border);border-radius:var(--r-sm);padding:0.25rem 0.6rem;cursor:pointer;transition:var(--ease)}
+.copy-btn:hover{background:var(--blue-subtle)}
+.skill-box-body{padding:1.25rem 1.5rem;font-size:0.85rem;line-height:1.7;color:var(--text)}
+.skill-box-body p{margin-bottom:0.5rem}
+.skill-box-body p:last-child{margin-bottom:0}
+.skill-hint{font-size:0.78rem;color:var(--text-secondary);text-align:center;margin-top:1rem}
+
+/* ─── Workflow ─── */
+.workflow-section{background:var(--bg);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.workflow-track{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+.workflow-track::before{content:'';position:absolute;top:20px;left:12.5%;width:75%;height:1px;background:var(--border);z-index:0}
+.wf-step{position:relative;z-index:1;padding:0 1.25rem}
+.wf-dot{width:40px;height:40px;border-radius:50%;background:var(--white);border:1.5px solid var(--border);display:flex;align-items:center;justify-content:center;margin:0 auto 1.5rem;font-size:0.9rem;font-weight:600;color:var(--text);transition:var(--ease)}
+.wf-step:hover .wf-dot{border-color:var(--blue);color:var(--blue)}
+.wf-step h4{text-align:center;font-size:0.95rem;margin-bottom:0.5rem}
+.wf-step p{text-align:center;font-size:0.82rem;color:var(--text-secondary);line-height:1.55;margin-bottom:0.75rem}
+.wf-cmd{text-align:center}
+.wf-cmd code{font-size:0.72rem;padding:3px 8px}
+
+/* ─── CTA ─── */
+.cta-section{background:var(--white);text-align:center;padding:6rem 0}
+.cta-section h2{font-size:2.5rem;margin-bottom:0.75rem}
+.cta-section>.container>p{color:var(--text-secondary);font-size:0.95rem;max-width:440px;margin:0 auto 2rem;line-height:1.7}
+.cta-actions{display:flex;gap:0.75rem;justify-content:center}
+
+/* Buttons */
+.btn{font-size:0.8125rem;font-weight:500;padding:0.5rem 1.25rem;border-radius:var(--r-md);border:none;cursor:pointer;transition:var(--ease);display:inline-flex;align-items:center;gap:0.4rem}
+.btn-fill{background:var(--blue);color:var(--white)}
+.btn-fill:hover{background:var(--blue-hover)}
+.btn-outline{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-outline:hover{background:var(--bg);border-color:var(--text-secondary)}
+
+/* ─── Footer ─── */
+footer{background:var(--bg);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
+.footer-logo{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.35rem;letter-spacing:-0.02em}
+.footer-logo svg{width:20px;height:20px}
+.footer-logo .logo-shell{color:var(--blue)}
+footer p{color:var(--text-secondary);font-size:0.78rem}
+footer .footer-links{margin:0.75rem 0;display:flex;gap:1.5rem;justify-content:center}
+footer .footer-links a{color:var(--text-secondary);font-size:0.78rem;transition:var(--ease)}
+footer .footer-links a:hover{color:var(--blue)}
+
+/* ─── Responsive ─── */
+@media(max-width:900px){
+  .hero-grid,.harness-grid{grid-template-columns:1fr;gap:3rem}
+  .problem-grid,.features-grid{grid-template-columns:1fr}
+  .workflow-track{grid-template-columns:repeat(2,1fr);gap:2rem}
+  .workflow-track::before{display:none}
+  .hero-content h1{font-size:2.5rem}
+  section{padding:5rem 0}
+  .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Nav (cc-website dark style) -->
+<nav class="nav-bar">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand"><svg viewBox="-4.32 -4.32 32.64 32.64"><g transform="translate(-4.32,-4.32) scale(1.02)"><path d="M16,29.851C18.888,29.844,22.025,30.717,24.461,29.165C26.898,27.613,27.569,24.458,28.666,21.784C29.719,19.214,30.939,16.653,30.726,13.883C30.504,11.011,29.346,8.247,27.455,6.074C25.567,3.903,22.932,2.605,20.182,1.759C17.404,0.904,14.367,0.16,11.657,1.21C9.011,2.235,7.765,5.11,5.935,7.279C4.132,9.414,1.672,11.131,0.994,13.842C0.288,16.665,1.04,19.634,2.177,22.313C3.335,25.043,4.909,27.787,7.513,29.207C10.055,30.593,13.104,29.858,16,29.851" fill="#165DFF"/></g><g stroke="#fff" stroke-width="1.2" fill="none" fill-rule="evenodd" stroke-linecap="round"><path d="M19.103,9.239L19.507,9.387C20.801,9.857,21.469,11.288,20.998,12.582C20.887,12.887,20.718,13.167,20.5,13.407L20.336,13.587C18.788,15.29,16.988,16.747,15,17.907L12.05,19.627C12.019,19.646,11.981,19.646,11.95,19.627L9,17.907C7.012,16.747,5.212,15.29,3.664,13.587L3.5,13.407C2.574,12.388,2.649,10.811,3.668,9.885C3.908,9.667,4.188,9.498,4.493,9.387L4.898,9.238M8.694,15.249L5.497,10.987C4.503,9.661,4.772,7.781,6.097,6.787C6.355,6.593,6.643,6.443,6.949,6.341L7.5,6.157C7.881,6.03,8.266,5.919,8.654,5.826L8.836,5.783C8.51,6.385,8.415,7.108,8.614,7.807L10.453,14.244M13.546,14.244L15.386,7.807C15.585,7.109,15.49,6.386,15.164,5.784C15.614,5.885,16.06,6.01,16.5,6.157L17.051,6.341C18.623,6.865,19.473,8.564,18.949,10.135C18.847,10.441,18.696,10.729,18.503,10.987L15.305,15.248M10.453,14.244L8.614,7.807C8.258,6.56,8.84,5.237,10,4.657C11.259,4.027,12.741,4.027,14,4.657C15.16,5.237,15.742,6.56,15.386,7.807L13.546,14.244"/><path d="M17,16.594L17,18.5C17,19.328,16.328,20,15.5,20L8.5,20C7.672,20,7,19.328,7,18.5L6.999,16.593"/></g></svg>nut<span class="logo-shell">shell</span></a>
+    <div class="nav-links">
+      <a href="#problem" data-lang-en>Problem</a><a href="#problem" data-lang-zh>问题</a>
+      <a href="#harness" data-lang-en>Philosophy</a><a href="#harness" data-lang-zh>理念</a>
+      <a href="#features" data-lang-en>Features</a><a href="#features" data-lang-zh>功能</a>
+      <a href="#cli">CLI</a>
+      <span class="nav-sep">|</span>
+      <a href="/" class="nav-back" data-lang-en>← ClawNet</a><a href="/" class="nav-back" data-lang-zh>← ClawNet 主站</a>
+      <div class="lang-sw" onclick="toggleLangMenu()">
+        <svg style="width:14px;height:14px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        <span id="langLabel">EN</span>
+        <div class="lang-menu" id="langMenu">
+          <a href="#" onclick="setLang('en',event)" class="active" data-lang-opt="en">EN · English</a>
+          <a href="#" onclick="setLang('zh',event)" data-lang-opt="zh">zh-CN · 简体中文</a>
+        </div>
+      </div>
+      <a href="https://github.com/ChatChatTech/nutshell" target="_blank" rel="noopener" class="btn-sm">GitHub <svg style="width:14px;height:14px;vertical-align:-2px;fill:currentColor" viewBox="0 0 24 24"><path d="M12 .587l3.668 7.568 8.332 1.151-6.064 5.828 1.48 8.279L12 19.771l-7.416 3.642 1.48-8.279L0 9.306l8.332-1.151z"/></svg></a>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="strata-bg">
+    <svg class="strata-layer-1" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="var(--blue)" d="M0,160L48,176C96,192,192,224,288,229.3C384,235,480,213,576,181.3C672,149,768,107,864,106.7C960,107,1056,149,1152,165.3C1248,181,1344,171,1392,165.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>
+    <svg class="strata-layer-2" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="var(--blue)" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>
+    <svg class="strata-layer-3" viewBox="0 0 1440 320" preserveAspectRatio="none"><path fill="var(--blue)" d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,218.7C672,235,768,245,864,229.3C960,213,1056,171,1152,149.3C1248,128,1344,128,1392,128L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"/></svg>
+  </div>
+  <div class="container hero-grid">
+    <div class="hero-content">
+      <h1 data-lang-en>Context is fragile.<br><span class="text-blue">Package it.</span></h1>
+      <h1 data-lang-zh>上下文很脆弱。<br><span class="text-blue">打包它。</span></h1>
+      <p data-lang-en>An open standard for bundling everything an AI agent needs — requirements, credentials, constraints, acceptance criteria — into a single <code>.nut</code> file.</p>
+      <p data-lang-zh>一个开放标准，将 AI agent 所需的一切 — 需求、凭证、约束、验收标准 — 打包到一个 <code>.nut</code> 文件中。</p>
+      <div class="hero-actions">
+        <a href="#cli" class="btn btn-fill" data-lang-en>Get Started</a>
+        <a href="#cli" class="btn btn-fill" data-lang-zh>快速开始</a>
+        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener" data-lang-en>Read the Spec</a>
+        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener" data-lang-zh>阅读规范</a>
+      </div>
+      <div class="install-hint">$ go install github.com/ChatChatTech/nutshell/cmd/nutshell@latest</div>
+    </div>
+    <div class="encapsulation-visual">
+      <div class="data-particle dp-1" style="--x:80px;--y:50px;">requirements.md</div>
+      <div class="data-particle dp-2" style="--x:100px;--y:-40px;">credentials/</div>
+      <div class="data-particle dp-3" style="--x:-90px;--y:60px;">architecture.md</div>
+      <div class="data-particle dp-4" style="--x:-70px;--y:-80px;">acceptance/</div>
+      <div class="shell-outer"></div>
+      <div class="shell-inner"><span class="nut-extension">.nut</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Problem -->
+<section id="problem" class="problem-section">
+  <div class="container">
+    <div class="sh">
+      <div class="sh-label" data-lang-en>The Problem</div>
+      <div class="sh-label" data-lang-zh>核心问题</div>
+      <h2 data-lang-en>Context Scatters</h2>
+      <h2 data-lang-zh>上下文散落各处</h2>
+      <p data-lang-en>AI agents are remarkably capable. Yet they consistently fail at the same thing: obtaining complete context. Every session starts from scratch.</p>
+      <p data-lang-zh>AI Agent 能力出众，但始终在同一件事上失败：获取完整上下文。每次会话都从零开始。</p>
+    </div>
+    <div class="problem-grid">
+      <div class="problem-card">
+        <div class="pc-line"></div>
+        <h3 data-lang-en>Context Drift</h3><h3 data-lang-zh>上下文漂移</h3>
+        <p data-lang-en>Information mutates across re-tellings. The agent's understanding silently diverges from reality with each new conversation.</p>
+        <p data-lang-zh>信息在反复转述中变异。Agent 的理解在每次新对话中悄然偏离现实。</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-line"></div>
+        <h3 data-lang-en>Security Exposure</h3><h3 data-lang-zh>安全暴露</h3>
+        <p data-lang-en>Credentials shared in plaintext chat. No encryption, no expiration, no audit trail. Every conversation is a potential leak.</p>
+        <p data-lang-zh>凭证以明文分享在聊天中。无加密、无过期、无审计轨迹。每次对话都是潜在泄露。</p>
+      </div>
+      <div class="problem-card">
+        <div class="pc-line"></div>
+        <h3 data-lang-en>No Reproducibility</h3><h3 data-lang-zh>不可复现</h3>
+        <p data-lang-en>If the agent fails, there's no way to replay the task with identical context. Debugging becomes archaeology.</p>
+        <p data-lang-zh>Agent 失败后无法用相同上下文重放任务。调试变成考古。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Harness -->
+<section id="harness" class="harness-section">
+  <div class="container harness-grid">
+    <div class="harness-content">
+      <div class="sh-label" style="text-align:left" data-lang-en>Philosophy</div>
+      <div class="sh-label" style="text-align:left" data-lang-zh>设计理念</div>
+      <h2 data-lang-en>Harness Engineering</h2>
+      <h2 data-lang-zh>Harness 工程</h2>
+      <p data-lang-en>In every engineering discipline, a harness is the layer that connects, protects, and orchestrates components — without doing the work itself. nutshell standardizes what goes into the context window.</p>
+      <p data-lang-zh>在每个工程学科中，harness 是连接、保护和编排组件的层 — 它本身不做具体工作。nutshell 标准化了进入上下文窗口的内容。</p>
+      <div class="harness-quote">
+        <p>"The biggest barrier to getting value from AI is your own ability to context and workflow engineer the models."</p>
+        <cite>— Jerry Liu, LlamaIndex</cite>
+      </div>
+      <div class="harness-quote">
+        <p>"The secret sauce is all in the model. The harness should be the thinnest possible wrapper."</p>
+        <cite>— Boris Cherny, Anthropic</cite>
+      </div>
+      <p class="harness-note" data-lang-en>nutshell takes a pragmatic position: good context improves every model. A <code>.nut</code> bundle is model-agnostic, harness-agnostic, and compounds across sessions.</p>
+      <p class="harness-note" data-lang-zh>nutshell 采取务实立场：好的上下文能提升每个模型。<code>.nut</code> 包与模型无关、与 harness 无关，且跨会话累积。</p>
+    </div>
+    <div class="harness-visual">
+      <div class="layer-diagram">
+        <div class="layer-ring outer">
+          <span class="layer-tag">nutshell.json</span>
+          <pre class="layer-code"><span class="ck">"task"</span>: { <span class="ck">"title"</span>: <span class="cs">"Build REST API"</span> },
+<span class="ck">"harness"</span>: { <span class="ck">"agent_type_hint"</span>: <span class="cs">"execution"</span> },
+<span class="ck">"credentials"</span>: { <span class="ck">"vault"</span>: <span class="cs">"credentials/vault.age"</span> }</pre>
+          <div class="layer-ring middle">
+            <span class="layer-tag">Context Strata</span>
+            <pre class="layer-code"><span class="cc">// Immutable workspace snapshot</span>
+context/requirements.md
+context/architecture.md
+files/src/api/handler.go</pre>
+            <div class="layer-ring inner">
+              <span class="layer-tag">Acceptance Criteria</span>
+              <pre class="layer-code"><span class="cc"># Verification</span>
+tests/acceptance.sh
+All endpoints return 200
+Coverage &gt; 80%</pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="features-section">
+  <div class="container">
+    <div class="sh">
+      <div class="sh-label" data-lang-en>Capabilities</div>
+      <div class="sh-label" data-lang-zh>核心功能</div>
+      <h2 data-lang-en>Built for the Real World</h2>
+      <h2 data-lang-zh>为真实场景而生</h2>
+      <p data-lang-en>Every feature exists because scattered context caused real failures. Zero external dependencies, pure Go.</p>
+      <p data-lang-zh>每个功能都源于散落上下文导致的真实失败。零外部依赖，纯 Go 实现。</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><path d="M11 19l-7-7 1.41-1.41L11 16.17l9.59-9.59L22 8z"/></svg></div>
+        <h3 data-lang-en>Reverse Management</h3><h3 data-lang-zh>反向管理</h3>
+        <p data-lang-en><code>nutshell check</code> tells the human what's missing — inverting the dynamic where agents ask 20 clarifying questions. The bundle manages you.</p>
+        <p data-lang-zh><code>nutshell check</code> 告诉人类缺少什么 — 反转了 Agent 问 20 个澄清问题的模式。让包来管理你。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></div>
+        <h3 data-lang-en>Credential Security</h3><h3 data-lang-zh>凭证安全</h3>
+        <p data-lang-en>Scoped, encrypted credentials with age/SOPS/Vault support. Each credential has expiration, rate limits, and endpoint restrictions.</p>
+        <p data-lang-zh>作用域受限的加密凭证，支持 age/SOPS/Vault。每个凭证都有过期时间、速率限制和端点限制。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></div>
+        <h3 data-lang-en>Immutable Bundles</h3><h3 data-lang-zh>不可变包</h3>
+        <p data-lang-en>SHA-256 hashes at file level and bundle level. Once packed, the <code>.nut</code> file guarantees content integrity. Path traversal protection on unpack.</p>
+        <p data-lang-zh>文件级和包级 SHA-256 哈希。打包后 <code>.nut</code> 文件保证内容完整性。解包时防止路径穿越攻击。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
+        <h3 data-lang-en>Request &rarr; Delivery Chain</h3><h3 data-lang-zh>请求 &rarr; 交付链</h3>
+        <p data-lang-en>Bundle types (request, delivery, template, checkpoint) form a complete audit trail. Diff two bundles to see exactly what changed.</p>
+        <p data-lang-zh>包类型（request、delivery、template、checkpoint）形成完整审计轨迹。Diff 两个包，精确查看变更。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <h3>Agent SDK</h3>
+        <p data-lang-en>Programmatic Go API: <code>nutshell.Open()</code> reads manifests, files, and context. Repack bundles. Works in any agent framework.</p>
+        <p data-lang-zh>Go 编程 API：<code>nutshell.Open()</code> 读取清单、文件和上下文。重新打包。适用于任何 Agent 框架。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></div>
+        <h3 data-lang-en>Context Budget</h3><h3 data-lang-zh>上下文预算</h3>
+        <p data-lang-en>The <code>context_budget_hint</code> field prevents context window overload. Warnings fire above 50% fill ratio. Compression built in.</p>
+        <p data-lang-zh><code>context_budget_hint</code> 字段防止上下文窗口过载。超过 50% 填充率时发出警告。内置压缩。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+        <h3>JSON Schema</h3>
+        <p data-lang-en>Full schema output via <code>nutshell schema</code>. IDE auto-completion and real-time validation for nutshell.json in VS Code.</p>
+        <p data-lang-zh>通过 <code>nutshell schema</code> 输出完整 Schema。VS Code 中自动补全和实时验证 nutshell.json。</p>
+      </div>
+      <div class="feature-item">
+        <div class="fi-icon"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg></div>
+        <h3 data-lang-en>Platform Extensions</h3><h3 data-lang-zh>平台扩展</h3>
+        <p data-lang-en>Optional integrations for ClawNet P2P, GitHub Actions, Linear, and more. Extensions never break the core format.</p>
+        <p data-lang-zh>可选集成 ClawNet P2P、GitHub Actions、Linear 等。扩展永不破坏核心格式。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLI -->
+<section id="cli" class="cli-section">
+  <div class="container">
+    <div class="sh">
+      <div class="sh-label" data-lang-en>Toolchain</div>
+      <div class="sh-label" data-lang-zh>工具链</div>
+      <h2 data-lang-en>Pack it up.</h2>
+      <h2 data-lang-zh>打包就好。</h2>
+      <p data-lang-en>17 commands. Zero dependencies. As natural as creating a git commit.</p>
+      <p data-lang-zh>17 条命令，零依赖。像创建 git commit 一样自然。</p>
+    </div>
+    <div class="terminal">
+      <div class="terminal-header"><div class="td td-r"></div><div class="td td-y"></div><div class="td td-g"></div></div>
+      <div class="terminal-body">
+        <div class="prompt"><span class="cmd">nutshell</span> init <span class="flag">--dir</span> <span class="arg">api-refactor</span></div>
+        <div class="output">Initialized nutshell.json and context/ in api-refactor/</div>
+        <span class="gap"></span>
+        <div class="prompt"><span class="cmd">nutshell</span> set <span class="arg">task.title</span> <span class="arg">"Migrate auth to RS256"</span></div>
+        <div class="output">Set task.title = "Migrate auth to RS256"</div>
+        <span class="gap"></span>
+        <div class="prompt"><span class="cmd">nutshell</span> check <span class="flag">--dir</span> <span class="arg">api-refactor</span></div>
+        <div class="output"><span class="warn">&#x26A0;</span> Missing: context/requirements.md, credentials/vault</div>
+        <div class="output"><span class="warn">&#x26A0;</span> No acceptance criteria defined</div>
+        <div class="output">Status: <span class="warn">incomplete</span></div>
+        <span class="gap"></span>
+        <div class="prompt"><span class="cmd">nutshell</span> pack <span class="flag">-o</span> <span class="arg">api-refactor.nut</span></div>
+        <div class="output"><span class="success">&#x2714;</span> Packed 12 files (8.4 KB) &rarr; api-refactor.nut</div>
+        <div class="output">sha256:a1b2c3d4e5f6...</div>
+        <span class="gap"></span>
+        <div class="prompt"><span class="cmd">nutshell</span> inspect <span class="arg">api-refactor.nut</span> <span class="flag">--json</span></div>
+        <div class="output">{ "task": "Migrate auth to RS256", "files": 12, "type": "request" }</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Teach Your Agent -->
+<section class="skill-section">
+  <div class="container">
+    <div class="sh">
+      <div class="sh-label" data-lang-en>One-Click Skill</div>
+      <div class="sh-label" data-lang-zh>一键教会 Agent</div>
+      <h2 data-lang-en>Teach Your Agent</h2>
+      <h2 data-lang-zh>让你的 Agent 学会 nutshell</h2>
+      <p data-lang-en>Copy the command below and paste it to Claude, Copilot, or any AI agent. They'll learn the nutshell standard and start using it immediately.</p>
+      <p data-lang-zh>复制下方命令，粘贴给 Claude、Copilot 或任何 AI Agent。它们会自动学习 nutshell 标准并立即开始使用。</p>
+    </div>
+    <div class="skill-box">
+      <div class="skill-box-header">
+        <span data-lang-en>Paste this to your AI agent</span>
+        <span data-lang-zh>粘贴给你的 AI Agent</span>
+        <button class="copy-btn" onclick="copySkill()"><span data-lang-en>Copy</span><span data-lang-zh>复制</span></button>
+      </div>
+      <div class="skill-box-body" id="skill-cmd">
+        <p>Fetch the nutshell spec and whitepaper from https://github.com/ChatChatTech/nutshell — read <code>spec/nutshell-spec-v0.2.0.md</code> and <code>docs/whitepaper.md</code>. Learn the .nut bundle format, the nutshell.json manifest schema, and the CLI commands (init, check, pack, unpack, inspect, validate, set, diff, schema, compress, split, merge, rotate, serve). From now on, when I describe a task, proactively suggest packaging it as a .nut bundle. Use <code>nutshell check</code> to verify completeness before execution.</p>
+      </div>
+    </div>
+    <p class="skill-hint" data-lang-en>Works with Claude Code, GitHub Copilot, Cursor, Windsurf, and any agent that can fetch URLs.</p>
+    <p class="skill-hint" data-lang-zh>适用于 Claude Code、GitHub Copilot、Cursor、Windsurf 及任何能抓取 URL 的 Agent。</p>
+  </div>
+</section>
+
+<!-- Workflow -->
+<section class="workflow-section">
+  <div class="container">
+    <div class="sh">
+      <div class="sh-label" data-lang-en>Workflow</div>
+      <div class="sh-label" data-lang-zh>工作流</div>
+      <h2 data-lang-en>How It Works</h2>
+      <h2 data-lang-zh>工作流程</h2>
+      <p data-lang-en>A complete handoff cycle between humans and agents, with nothing lost in translation.</p>
+      <p data-lang-zh>人与 Agent 之间完整的交接循环，信息零丢失。</p>
+    </div>
+    <div class="workflow-track">
+      <div class="wf-step">
+        <div class="wf-dot">1</div>
+        <h4 data-lang-en>Initialize</h4><h4 data-lang-zh>初始化</h4>
+        <p data-lang-en>Create a bundle directory with manifest and context folder.</p>
+        <p data-lang-zh>创建包目录，包含清单和上下文文件夹。</p>
+        <div class="wf-cmd"><code>nutshell init</code></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot">2</div>
+        <h4 data-lang-en>Fill Context</h4><h4 data-lang-zh>填充上下文</h4>
+        <p data-lang-en>Add requirements, files, credentials. Let check tell you what's missing.</p>
+        <p data-lang-zh>添加需求、文件、凭证。让 check 告诉你缺少什么。</p>
+        <div class="wf-cmd"><code>nutshell check</code></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot">3</div>
+        <h4 data-lang-en>Pack &amp; Send</h4><h4 data-lang-zh>打包发送</h4>
+        <p data-lang-en>Compress into an integrity-verified bundle. Hand to any agent.</p>
+        <p data-lang-zh>压缩为完整性验证的包，交给任何 Agent。</p>
+        <div class="wf-cmd"><code>nutshell pack</code></div>
+      </div>
+      <div class="wf-step">
+        <div class="wf-dot">4</div>
+        <h4 data-lang-en>Deliver</h4><h4 data-lang-zh>交付</h4>
+        <p data-lang-en>Agent unpacks, executes, and packs a delivery bundle back.</p>
+        <p data-lang-zh>Agent 解包、执行，然后打包交付包返回。</p>
+        <div class="wf-cmd"><code>nutshell deliver</code></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2 data-lang-en>Stop re-explaining context.</h2>
+    <h2 data-lang-zh>别再重复解释上下文了。</h2>
+    <p data-lang-en>Open source, zero-dependency, and ready for production. Package your next task in a shell.</p>
+    <p data-lang-zh>开源、零依赖、生产就绪。用 nutshell 打包你的下一个任务。</p>
+    <div class="cta-actions">
+      <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-fill" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+        <span data-lang-en>View on GitHub</span><span data-lang-zh>GitHub 仓库</span>
+      </a>
+      <a href="https://github.com/ChatChatTech/nutshell/blob/main/docs/whitepaper.md" class="btn btn-outline" target="_blank" rel="noopener">
+        <span data-lang-en>Read the Whitepaper</span><span data-lang-zh>阅读白皮书</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="footer-logo"><svg viewBox="-4.32 -4.32 32.64 32.64"><g transform="translate(-4.32,-4.32) scale(1.02)"><path d="M16,29.851C18.888,29.844,22.025,30.717,24.461,29.165C26.898,27.613,27.569,24.458,28.666,21.784C29.719,19.214,30.939,16.653,30.726,13.883C30.504,11.011,29.346,8.247,27.455,6.074C25.567,3.903,22.932,2.605,20.182,1.759C17.404,0.904,14.367,0.16,11.657,1.21C9.011,2.235,7.765,5.11,5.935,7.279C4.132,9.414,1.672,11.131,0.994,13.842C0.288,16.665,1.04,19.634,2.177,22.313C3.335,25.043,4.909,27.787,7.513,29.207C10.055,30.593,13.104,29.858,16,29.851" fill="#165DFF"/></g><g stroke="#fff" stroke-width="1.2" fill="none" fill-rule="evenodd" stroke-linecap="round"><path d="M19.103,9.239L19.507,9.387C20.801,9.857,21.469,11.288,20.998,12.582C20.887,12.887,20.718,13.167,20.5,13.407L20.336,13.587C18.788,15.29,16.988,16.747,15,17.907L12.05,19.627C12.019,19.646,11.981,19.646,11.95,19.627L9,17.907C7.012,16.747,5.212,15.29,3.664,13.587L3.5,13.407C2.574,12.388,2.649,10.811,3.668,9.885C3.908,9.667,4.188,9.498,4.493,9.387L4.898,9.238M8.694,15.249L5.497,10.987C4.503,9.661,4.772,7.781,6.097,6.787C6.355,6.593,6.643,6.443,6.949,6.341L7.5,6.157C7.881,6.03,8.266,5.919,8.654,5.826L8.836,5.783C8.51,6.385,8.415,7.108,8.614,7.807L10.453,14.244M13.546,14.244L15.386,7.807C15.585,7.109,15.49,6.386,15.164,5.784C15.614,5.885,16.06,6.01,16.5,6.157L17.051,6.341C18.623,6.865,19.473,8.564,18.949,10.135C18.847,10.441,18.696,10.729,18.503,10.987L15.305,15.248M10.453,14.244L8.614,7.807C8.258,6.56,8.84,5.237,10,4.657C11.259,4.027,12.741,4.027,14,4.657C15.16,5.237,15.742,6.56,15.386,7.807L13.546,14.244"/><path d="M17,16.594L17,18.5C17,19.328,16.328,20,15.5,20L8.5,20C7.672,20,7,19.328,7,18.5L6.999,16.593"/></g></svg>nut<span class="logo-shell">shell</span></div>
+    <div class="footer-links">
+      <a href="https://github.com/ChatChatTech/nutshell" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://github.com/ChatChatTech/nutshell/blob/main/docs/whitepaper.md" target="_blank" rel="noopener" data-lang-en>Whitepaper</a>
+      <a href="https://github.com/ChatChatTech/nutshell/blob/main/docs/whitepaper.md" target="_blank" rel="noopener" data-lang-zh>白皮书</a>
+      <a href="https://github.com/ChatChatTech/nutshell/blob/main/spec/nutshell-spec-v0.2.0.md" target="_blank" rel="noopener" data-lang-en>Specification</a>
+      <a href="https://github.com/ChatChatTech/nutshell/blob/main/spec/nutshell-spec-v0.2.0.md" target="_blank" rel="noopener" data-lang-zh>规范</a>
+      <a href="/" data-lang-en>ClawNet Home</a>
+      <a href="/" data-lang-zh>ClawNet 主站</a>
+    </div>
+    <p data-lang-en>An open standard for AI agent task packaging. Built by ChatChat.</p>
+    <p data-lang-zh>AI Agent 任务打包开放标准。由 ChatChat 构建。</p>
+    <p style="margin-top:0.35rem">&copy; 2023–2026 nutshell. Open Source under MIT License.</p>
+  </div>
+</footer>
+
+<script>
+/* ── Language switcher (cc-website style dropdown) ── */
+var langLabels={'en':'EN','zh':'中文'};
+
+function toggleLangMenu(){
+  document.getElementById('langMenu').classList.toggle('show');
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.lang-sw'))document.getElementById('langMenu').classList.remove('show');
+});
+
+function setLang(lang,e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  document.documentElement.lang=lang;
+  document.getElementById('langLabel').textContent=langLabels[lang]||lang;
+  document.querySelectorAll('[data-lang-opt]').forEach(function(a){
+    a.classList.toggle('active',a.getAttribute('data-lang-opt')===lang);
+  });
+  document.getElementById('langMenu').classList.remove('show');
+  try{localStorage.setItem('nutshell-lang',lang);}catch(x){}
+}
+
+function copySkill(){
+  var text=document.getElementById('skill-cmd').innerText;
+  navigator.clipboard.writeText(text).then(function(){
+    var btn=document.querySelector('.copy-btn');
+    var orig=btn.innerHTML;
+    btn.textContent='Copied!';
+    setTimeout(function(){btn.innerHTML=orig;},1500);
+  });
+}
+
+/* Restore saved language */
+(function(){
+  var saved;
+  try{saved=localStorage.getItem('nutshell-lang');}catch(x){}
+  if(saved && langLabels[saved]) setLang(saved);
+})();
+</script>
+</body>
+</html>
