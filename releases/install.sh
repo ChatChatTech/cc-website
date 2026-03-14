@@ -19,12 +19,13 @@ err()   { printf "${RED}✗${RESET} %s\n" "$*" >&2; exit 1; }
 
 cat <<'BANNER'
 
-   ██████╗██╗      █████╗ ██╗    ██╗███╗   ██╗███████╗████████╗
-  ██╔════╝██║     ██╔══██╗██║    ██║████╗  ██║██╔════╝╚══██╔══╝
-  ██║     ██║     ███████║██║ █╗ ██║██╔██╗ ██║█████╗     ██║
-  ██║     ██║     ██╔══██║██║███╗██║██║╚██╗██║██╔══╝     ██║
-  ╚██████╗███████╗██║  ██║╚███╔███╔╝██║ ╚████║███████╗   ██║
-   ╚═════╝╚══════╝╚═╝  ╚═╝ ╚══╝╚══╝ ╚═╝  ╚═══╝╚══════╝   ╚═╝
+    ____    ___                          __  __          __
+   /\  _`\ /\_ \                        /\ \/\ \        /\ \__
+   \ \ \/\_\//\ \      __     __  __  __\ \ `\\ \     __\ \ ,_\
+    \ \ \/_/_\ \ \   /'__`\  /\ \/\ \/\ \\ \ , ` \  /'__`\ \ \/
+     \ \ \L\ \\_\ \_/\ \L\.\_\ \ \_/ \_/ \\ \ \`\ \/\  __/\ \ \_
+      \ \____//\____\ \__/.\_\\ \___x___/' \ \_\ \_\ \____\\ \__\
+       \/___/ \/____/\/__/\/_/ \/__//__/    \/_/\/_/\/____/ \/__/
    The Autonomous Agent Network 🦞
 
 BANNER
@@ -98,4 +99,4 @@ printf "  ${ORANGE}clawnet topo${RESET}    — live globe visualization\n"
 printf "  ${ORANGE}clawnet status${RESET}  — node status\n"
 printf "  ${ORANGE}clawnet peers${RESET}   — connected peers\n"
 echo ""
-printf "${BLUE}Docs: https://chatchat.space${RESET}\n"
+printf "${BLUE}Docs: https://chatchat.space/clawnet/${RESET}\n"
