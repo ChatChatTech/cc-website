@@ -18,9 +18,7 @@
   --font-mono:'JetBrains Mono',Menlo,monospace;
   --r-sm:4px; --r-md:8px; --r-lg:12px;
   --ease:all 0.25s cubic-bezier(0.25,1,0.5,1);
-  /* nav dark palette (cc-website) */
-  --nav-bg:rgba(10,10,10,0.92); --nav-foam:#F1FAEE; --nav-foam-dim:rgba(241,250,238,0.6);
-  --red:#E63946; --red-dim:rgba(230,57,70,0.25);
+  --blue-dim:rgba(22,93,255,0.15);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font-body);background:var(--white);color:var(--text);line-height:1.6;overflow-x:hidden;-webkit-font-smoothing:antialiased}
@@ -36,27 +34,27 @@ a{text-decoration:none;color:inherit}
 html[lang="zh"] [data-lang-en]{display:none}
 html[lang="zh"] [data-lang-zh]{display:revert}
 
-/* ─── Nav (cc-website dark style) ─── */
-.nav-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:var(--nav-bg);backdrop-filter:blur(12px);border-bottom:1px solid var(--red-dim)}
+/* ─── Nav (white, blue accent) ─── */
+.nav-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:56px}
-.nav-brand{display:flex;align-items:center;gap:8px;font-size:1.1rem;font-weight:700;color:var(--nav-foam);letter-spacing:-0.02em}
+.nav-brand{display:flex;align-items:center;gap:6px;font-size:1.1rem;font-weight:700;color:var(--text);letter-spacing:-0.02em}
 .nav-brand svg{width:24px;height:24px;flex-shrink:0}
 .nav-brand .logo-shell{color:var(--blue)}
 .nav-links{display:flex;gap:24px;font-size:0.9rem;align-items:center}
-.nav-links a{color:var(--nav-foam-dim);transition:color 0.2s}
-.nav-links a:hover{color:var(--red)}
-.nav-links .btn-sm{background:var(--red);color:#fff;padding:6px 16px;border-radius:6px;font-weight:600;transition:background 0.2s}
-.nav-links .btn-sm:hover{background:#c22e3a;color:#fff}
+.nav-links a{color:var(--text-secondary);transition:color 0.2s}
+.nav-links a:hover{color:var(--blue)}
+.nav-links .btn-sm{background:var(--blue);color:#fff;padding:6px 16px;border-radius:6px;font-weight:600;transition:background 0.2s}
+.nav-links .btn-sm:hover{background:var(--blue-hover);color:#fff}
 .nav-back{font-size:0.82rem;opacity:0.7;transition:opacity 0.2s}
 .nav-back:hover{opacity:1}
-.nav-sep{color:var(--nav-foam-dim);opacity:0.3;font-weight:300}
-.lang-sw{position:relative;display:inline-flex;align-items:center;cursor:pointer;font-size:0.72rem;color:var(--nav-foam-dim);gap:4px;padding:4px 10px;border:1px solid var(--red-dim);border-radius:6px;background:transparent;user-select:none;letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
-.lang-sw:hover{border-color:var(--red);color:var(--nav-foam)}
-.lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:#111;border:1px solid var(--red-dim);border-radius:8px;overflow:hidden;min-width:140px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.5)}
+.nav-sep{color:var(--text-secondary);opacity:0.3;font-weight:300}
+.lang-sw{position:relative;display:inline-flex;align-items:center;cursor:pointer;font-size:0.72rem;color:var(--text-secondary);gap:4px;padding:4px 10px;border:1px solid var(--border);border-radius:6px;background:transparent;user-select:none;letter-spacing:1.5px;font-weight:600;text-transform:uppercase}
+.lang-sw:hover{border-color:var(--blue);color:var(--text)}
+.lang-menu{display:none;position:absolute;top:calc(100% + 6px);right:0;background:var(--white);border:1px solid var(--border);border-radius:8px;overflow:hidden;min-width:140px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,0.1)}
 .lang-menu.show{display:block}
-.lang-menu a{display:block;padding:8px 16px;color:var(--nav-foam-dim);font-size:0.82rem;white-space:nowrap}
-.lang-menu a:hover{background:var(--red-dim);color:var(--nav-foam)}
-.lang-menu a.active{color:var(--red);font-weight:600}
+.lang-menu a{display:block;padding:8px 16px;color:var(--text-secondary);font-size:0.82rem;white-space:nowrap}
+.lang-menu a:hover{background:var(--blue-subtle);color:var(--text)}
+.lang-menu a.active{color:var(--blue);font-weight:600}
 
 /* ─── Hero ─── */
 .hero{min-height:100vh;display:flex;align-items:center;padding-top:56px;position:relative;overflow:hidden;background:var(--white)}
@@ -182,9 +180,8 @@ html[lang="zh"] [data-lang-zh]{display:revert}
 
 /* ─── Footer ─── */
 footer{background:var(--bg);border-top:1px solid var(--border);padding:3rem 2rem;text-align:center}
-.footer-logo{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;display:flex;align-items:center;justify-content:center;gap:0.35rem;letter-spacing:-0.02em}
+.footer-logo{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:0.75rem;display:flex;align-items:center;justify-content:center;gap:6px;letter-spacing:-0.02em}
 .footer-logo svg{width:20px;height:20px}
-.footer-logo .logo-shell{color:var(--blue)}
 footer p{color:var(--text-secondary);font-size:0.78rem}
 footer .footer-links{margin:0.75rem 0;display:flex;gap:1.5rem;justify-content:center}
 footer .footer-links a{color:var(--text-secondary);font-size:0.78rem;transition:var(--ease)}
@@ -204,10 +201,10 @@ footer .footer-links a:hover{color:var(--blue)}
 </head>
 <body>
 
-<!-- Nav (cc-website dark style) -->
+<!-- Nav -->
 <nav class="nav-bar">
   <div class="nav-inner">
-    <a href="/" class="nav-brand"><svg viewBox="-4.32 -4.32 32.64 32.64"><g transform="translate(-4.32,-4.32) scale(1.02)"><path d="M16,29.851C18.888,29.844,22.025,30.717,24.461,29.165C26.898,27.613,27.569,24.458,28.666,21.784C29.719,19.214,30.939,16.653,30.726,13.883C30.504,11.011,29.346,8.247,27.455,6.074C25.567,3.903,22.932,2.605,20.182,1.759C17.404,0.904,14.367,0.16,11.657,1.21C9.011,2.235,7.765,5.11,5.935,7.279C4.132,9.414,1.672,11.131,0.994,13.842C0.288,16.665,1.04,19.634,2.177,22.313C3.335,25.043,4.909,27.787,7.513,29.207C10.055,30.593,13.104,29.858,16,29.851" fill="#165DFF"/></g><g stroke="#fff" stroke-width="1.2" fill="none" fill-rule="evenodd" stroke-linecap="round"><path d="M19.103,9.239L19.507,9.387C20.801,9.857,21.469,11.288,20.998,12.582C20.887,12.887,20.718,13.167,20.5,13.407L20.336,13.587C18.788,15.29,16.988,16.747,15,17.907L12.05,19.627C12.019,19.646,11.981,19.646,11.95,19.627L9,17.907C7.012,16.747,5.212,15.29,3.664,13.587L3.5,13.407C2.574,12.388,2.649,10.811,3.668,9.885C3.908,9.667,4.188,9.498,4.493,9.387L4.898,9.238M8.694,15.249L5.497,10.987C4.503,9.661,4.772,7.781,6.097,6.787C6.355,6.593,6.643,6.443,6.949,6.341L7.5,6.157C7.881,6.03,8.266,5.919,8.654,5.826L8.836,5.783C8.51,6.385,8.415,7.108,8.614,7.807L10.453,14.244M13.546,14.244L15.386,7.807C15.585,7.109,15.49,6.386,15.164,5.784C15.614,5.885,16.06,6.01,16.5,6.157L17.051,6.341C18.623,6.865,19.473,8.564,18.949,10.135C18.847,10.441,18.696,10.729,18.503,10.987L15.305,15.248M10.453,14.244L8.614,7.807C8.258,6.56,8.84,5.237,10,4.657C11.259,4.027,12.741,4.027,14,4.657C15.16,5.237,15.742,6.56,15.386,7.807L13.546,14.244"/><path d="M17,16.594L17,18.5C17,19.328,16.328,20,15.5,20L8.5,20C7.672,20,7,19.328,7,18.5L6.999,16.593"/></g></svg>nut<span class="logo-shell">shell</span></a>
+    <a href="/" class="nav-brand"><svg viewBox="-4.32 -4.32 32.64 32.64"><g transform="translate(-4.32,-4.32) scale(1.02)"><path d="M16,29.851C18.888,29.844,22.025,30.717,24.461,29.165C26.898,27.613,27.569,24.458,28.666,21.784C29.719,19.214,30.939,16.653,30.726,13.883C30.504,11.011,29.346,8.247,27.455,6.074C25.567,3.903,22.932,2.605,20.182,1.759C17.404,0.904,14.367,0.16,11.657,1.21C9.011,2.235,7.765,5.11,5.935,7.279C4.132,9.414,1.672,11.131,0.994,13.842C0.288,16.665,1.04,19.634,2.177,22.313C3.335,25.043,4.909,27.787,7.513,29.207C10.055,30.593,13.104,29.858,16,29.851" fill="#165DFF"/></g><g stroke="#fff" stroke-width="1.2" fill="none" fill-rule="evenodd" stroke-linecap="round"><path d="M19.103,9.239L19.507,9.387C20.801,9.857,21.469,11.288,20.998,12.582C20.887,12.887,20.718,13.167,20.5,13.407L20.336,13.587C18.788,15.29,16.988,16.747,15,17.907L12.05,19.627C12.019,19.646,11.981,19.646,11.95,19.627L9,17.907C7.012,16.747,5.212,15.29,3.664,13.587L3.5,13.407C2.574,12.388,2.649,10.811,3.668,9.885C3.908,9.667,4.188,9.498,4.493,9.387L4.898,9.238M8.694,15.249L5.497,10.987C4.503,9.661,4.772,7.781,6.097,6.787C6.355,6.593,6.643,6.443,6.949,6.341L7.5,6.157C7.881,6.03,8.266,5.919,8.654,5.826L8.836,5.783C8.51,6.385,8.415,7.108,8.614,7.807L10.453,14.244M13.546,14.244L15.386,7.807C15.585,7.109,15.49,6.386,15.164,5.784C15.614,5.885,16.06,6.01,16.5,6.157L17.051,6.341C18.623,6.865,19.473,8.564,18.949,10.135C18.847,10.441,18.696,10.729,18.503,10.987L15.305,15.248M10.453,14.244L8.614,7.807C8.258,6.56,8.84,5.237,10,4.657C11.259,4.027,12.741,4.027,14,4.657C15.16,5.237,15.742,6.56,15.386,7.807L13.546,14.244"/><path d="M17,16.594L17,18.5C17,19.328,16.328,20,15.5,20L8.5,20C7.672,20,7,19.328,7,18.5L6.999,16.593"/></g></svg>nutshell</a>
     <div class="nav-links">
       <a href="#problem" data-lang-en>Problem</a><a href="#problem" data-lang-zh>问题</a>
       <a href="#harness" data-lang-en>Philosophy</a><a href="#harness" data-lang-zh>理念</a>
@@ -244,8 +241,7 @@ footer .footer-links a:hover{color:var(--blue)}
       <div class="hero-actions">
         <a href="#cli" class="btn btn-fill" data-lang-en>Get Started</a>
         <a href="#cli" class="btn btn-fill" data-lang-zh>快速开始</a>
-        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener" data-lang-en>Read the Spec</a>
-        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener" data-lang-zh>阅读规范</a>
+        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener">Read the Spec</a>
       </div>
       <div class="install-hint">$ go install github.com/ChatChatTech/nutshell/cmd/nutshell@latest</div>
     </div>
@@ -534,7 +530,7 @@ Coverage &gt; 80%</pre>
 <!-- Footer -->
 <footer>
   <div class="container">
-    <div class="footer-logo"><svg viewBox="-4.32 -4.32 32.64 32.64"><g transform="translate(-4.32,-4.32) scale(1.02)"><path d="M16,29.851C18.888,29.844,22.025,30.717,24.461,29.165C26.898,27.613,27.569,24.458,28.666,21.784C29.719,19.214,30.939,16.653,30.726,13.883C30.504,11.011,29.346,8.247,27.455,6.074C25.567,3.903,22.932,2.605,20.182,1.759C17.404,0.904,14.367,0.16,11.657,1.21C9.011,2.235,7.765,5.11,5.935,7.279C4.132,9.414,1.672,11.131,0.994,13.842C0.288,16.665,1.04,19.634,2.177,22.313C3.335,25.043,4.909,27.787,7.513,29.207C10.055,30.593,13.104,29.858,16,29.851" fill="#165DFF"/></g><g stroke="#fff" stroke-width="1.2" fill="none" fill-rule="evenodd" stroke-linecap="round"><path d="M19.103,9.239L19.507,9.387C20.801,9.857,21.469,11.288,20.998,12.582C20.887,12.887,20.718,13.167,20.5,13.407L20.336,13.587C18.788,15.29,16.988,16.747,15,17.907L12.05,19.627C12.019,19.646,11.981,19.646,11.95,19.627L9,17.907C7.012,16.747,5.212,15.29,3.664,13.587L3.5,13.407C2.574,12.388,2.649,10.811,3.668,9.885C3.908,9.667,4.188,9.498,4.493,9.387L4.898,9.238M8.694,15.249L5.497,10.987C4.503,9.661,4.772,7.781,6.097,6.787C6.355,6.593,6.643,6.443,6.949,6.341L7.5,6.157C7.881,6.03,8.266,5.919,8.654,5.826L8.836,5.783C8.51,6.385,8.415,7.108,8.614,7.807L10.453,14.244M13.546,14.244L15.386,7.807C15.585,7.109,15.49,6.386,15.164,5.784C15.614,5.885,16.06,6.01,16.5,6.157L17.051,6.341C18.623,6.865,19.473,8.564,18.949,10.135C18.847,10.441,18.696,10.729,18.503,10.987L15.305,15.248M10.453,14.244L8.614,7.807C8.258,6.56,8.84,5.237,10,4.657C11.259,4.027,12.741,4.027,14,4.657C15.16,5.237,15.742,6.56,15.386,7.807L13.546,14.244"/><path d="M17,16.594L17,18.5C17,19.328,16.328,20,15.5,20L8.5,20C7.672,20,7,19.328,7,18.5L6.999,16.593"/></g></svg>nut<span class="logo-shell">shell</span></div>
+    <div class="footer-logo"><svg viewBox="-4.32 -4.32 32.64 32.64"><g transform="translate(-4.32,-4.32) scale(1.02)"><path d="M16,29.851C18.888,29.844,22.025,30.717,24.461,29.165C26.898,27.613,27.569,24.458,28.666,21.784C29.719,19.214,30.939,16.653,30.726,13.883C30.504,11.011,29.346,8.247,27.455,6.074C25.567,3.903,22.932,2.605,20.182,1.759C17.404,0.904,14.367,0.16,11.657,1.21C9.011,2.235,7.765,5.11,5.935,7.279C4.132,9.414,1.672,11.131,0.994,13.842C0.288,16.665,1.04,19.634,2.177,22.313C3.335,25.043,4.909,27.787,7.513,29.207C10.055,30.593,13.104,29.858,16,29.851" fill="#165DFF"/></g><g stroke="#fff" stroke-width="1.2" fill="none" fill-rule="evenodd" stroke-linecap="round"><path d="M19.103,9.239L19.507,9.387C20.801,9.857,21.469,11.288,20.998,12.582C20.887,12.887,20.718,13.167,20.5,13.407L20.336,13.587C18.788,15.29,16.988,16.747,15,17.907L12.05,19.627C12.019,19.646,11.981,19.646,11.95,19.627L9,17.907C7.012,16.747,5.212,15.29,3.664,13.587L3.5,13.407C2.574,12.388,2.649,10.811,3.668,9.885C3.908,9.667,4.188,9.498,4.493,9.387L4.898,9.238M8.694,15.249L5.497,10.987C4.503,9.661,4.772,7.781,6.097,6.787C6.355,6.593,6.643,6.443,6.949,6.341L7.5,6.157C7.881,6.03,8.266,5.919,8.654,5.826L8.836,5.783C8.51,6.385,8.415,7.108,8.614,7.807L10.453,14.244M13.546,14.244L15.386,7.807C15.585,7.109,15.49,6.386,15.164,5.784C15.614,5.885,16.06,6.01,16.5,6.157L17.051,6.341C18.623,6.865,19.473,8.564,18.949,10.135C18.847,10.441,18.696,10.729,18.503,10.987L15.305,15.248M10.453,14.244L8.614,7.807C8.258,6.56,8.84,5.237,10,4.657C11.259,4.027,12.741,4.027,14,4.657C15.16,5.237,15.742,6.56,15.386,7.807L13.546,14.244"/><path d="M17,16.594L17,18.5C17,19.328,16.328,20,15.5,20L8.5,20C7.672,20,7,19.328,7,18.5L6.999,16.593"/></g></svg>nutshell</div>
     <div class="footer-links">
       <a href="https://github.com/ChatChatTech/nutshell" target="_blank" rel="noopener">GitHub</a>
       <a href="https://github.com/ChatChatTech/nutshell/blob/main/docs/whitepaper.md" target="_blank" rel="noopener" data-lang-en>Whitepaper</a>
