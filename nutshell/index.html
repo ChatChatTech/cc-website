@@ -85,7 +85,7 @@ html[lang="zh"] [data-lang-zh]{display:revert}
 .install-hint{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-secondary);margin-top:1.5rem;padding:0.45rem 0.9rem;background:var(--bg);border-radius:var(--r-sm);border:1px solid var(--border);display:inline-block}
 
 /* Install bar */
-.install-bar{background:var(--white);border:1px solid var(--blue-dim);border-radius:14px;padding:12px 18px;display:flex;align-items:center;gap:10px;max-width:480px;margin:1.5rem 0 0;font-family:var(--font-mono);font-size:0.78rem;cursor:pointer;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,background .3s}
+.install-bar{background:var(--white);border:1px solid var(--blue-dim);border-radius:14px;padding:12px 18px;display:flex;align-items:center;gap:10px;max-width:420px;margin:1.5rem 0 0;font-family:var(--font-mono);font-size:0.78rem;cursor:pointer;position:relative;overflow:hidden;transition:border-color .3s,box-shadow .3s,background .3s}
 .install-bar::before{content:'';position:absolute;top:0;left:0;width:100%;height:100%;background:radial-gradient(circle 2px,rgba(22,93,255,.12) 1px,transparent 1px);background-size:12px 12px;transform:rotate(-15deg) scale(1.4);opacity:0;transition:opacity .3s;pointer-events:none}
 .install-bar:hover::before{opacity:1}
 .install-bar:hover{border-color:var(--blue);box-shadow:0 8px 32px rgba(22,93,255,.08);background:linear-gradient(135deg,rgba(22,93,255,.03),rgba(255,255,255,.4))}
@@ -93,7 +93,7 @@ html[lang="zh"] [data-lang-zh]{display:revert}
 .install-bar code{flex:1;color:var(--blue);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:none;padding:0;font-size:inherit}
 .install-bar .copy-icon-btn{background:none;border:none;cursor:pointer;padding:2px;display:inline-flex;align-items:center;flex-shrink:0;opacity:.4;transition:opacity .2s;pointer-events:none}
 .install-bar:hover .copy-icon-btn{opacity:.7}
-.install-bar-hint{margin:0.45rem 0 0;font-size:0.7rem;color:var(--text-secondary);font-family:var(--font-body);text-align:left;max-width:480px;min-height:1.4em;line-height:1.4}
+.install-bar-hint{margin:0.45rem 0 0;font-size:0.7rem;color:var(--text-secondary);font-family:var(--font-body);text-align:left;max-width:420px;min-height:1.4em;line-height:1.4;padding-left:1.2rem}
 .install-bar-hint .typewriter{display:inline;border-right:2px solid var(--blue);padding-right:2px;animation:blink .6s step-end infinite}
 @keyframes blink{50%{border-color:transparent}}
 
@@ -339,7 +339,7 @@ footer .footer-links a:hover{color:var(--blue)}
       <p data-lang-zh>一个开放标准，将 AI agent 所需的一切 — 需求、凭证、约束、验收标准 — 打包到一个 <code>.nut</code> 文件中。</p>
       <div class="install-bar" onclick="copyInstall(this)" title="Click to copy">
         <span class="dollar">$</span>
-        <code>Read https://chatchat.space/nutshell-skill.md and help me use nutshell.</code>
+        <code>Read https://chatchat.space/nutshell-skill.md</code>
         <span class="copy-icon-btn"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
       </div>
       <div class="install-bar-hint"><span class="typewriter" id="hero-typewriter"></span></div>
@@ -383,8 +383,8 @@ footer .footer-links a:hover{color:var(--blue)}
       <div class="skill-install-bar" onclick="copySkill(0)" title="Click to copy">
         <span class="dollar" data-lang-en>Paste →</span>
         <span class="dollar" data-lang-zh>粘贴 →</span>
-        <code class="skill-text" id="skill-cmd-0-en" data-lang-en>Read https://chatchat.space/nutshell-skill.md and help me use nutshell.</code>
-        <code class="skill-text" id="skill-cmd-0-zh" data-lang-zh>阅读 https://chatchat.space/nutshell-skill.md 并帮我使用 nutshell。</code>
+        <code class="skill-text" id="skill-cmd-0-en" data-lang-en>Read https://chatchat.space/nutshell-skill.md</code>
+        <code class="skill-text" id="skill-cmd-0-zh" data-lang-zh>阅读 https://chatchat.space/nutshell-skill.md</code>
         <span class="copy-icon-btn"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
       </div>
     </div>
