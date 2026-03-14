@@ -80,8 +80,8 @@ html[lang="zh"] [data-lang-zh]{display:revert}
 .strata-layer-3{opacity:0.07;transform:translateY(60px) scaleY(0.7)}
 .hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;position:relative;z-index:1}
 .hero-content h1{font-size:clamp(2.75rem,4.2vw,4.2rem);margin-bottom:1.25rem;line-height:1.1}
-.hero-content>p{font-size:1.05rem;color:var(--text-secondary);margin-bottom:2rem;max-width:440px;line-height:1.7}
-.hero-actions{display:flex;gap:0.75rem;align-items:center}
+.hero-content>p{font-size:1.05rem;color:var(--text-secondary);margin-bottom:1.5rem;max-width:440px;line-height:1.7}
+.hero-actions{display:flex;gap:0.75rem;align-items:center;margin-top:1.25rem}
 .install-hint{font-family:var(--font-mono);font-size:0.78rem;color:var(--text-secondary);margin-top:1.5rem;padding:0.45rem 0.9rem;background:var(--bg);border-radius:var(--r-sm);border:1px solid var(--border);display:inline-block}
 
 /* Install bar */
@@ -93,7 +93,7 @@ html[lang="zh"] [data-lang-zh]{display:revert}
 .install-bar code{flex:1;color:var(--blue);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;background:none;padding:0;font-size:inherit}
 .install-bar .copy-icon-btn{background:none;border:none;cursor:pointer;padding:2px;display:inline-flex;align-items:center;flex-shrink:0;opacity:.4;transition:opacity .2s;pointer-events:none}
 .install-bar:hover .copy-icon-btn{opacity:.7}
-.install-bar-hint{margin:0.55rem 0 0;font-size:0.7rem;color:var(--text-secondary);font-family:var(--font-body);text-align:left;max-width:480px;height:1.2em;overflow:hidden}
+.install-bar-hint{margin:0.45rem 0 0;font-size:0.7rem;color:var(--text-secondary);font-family:var(--font-body);text-align:left;max-width:480px;min-height:1.4em;line-height:1.4}
 .install-bar-hint .typewriter{display:inline;border-right:2px solid var(--blue);padding-right:2px;animation:blink .6s step-end infinite}
 @keyframes blink{50%{border-color:transparent}}
 
@@ -337,16 +337,16 @@ footer .footer-links a:hover{color:var(--blue)}
       <h1 data-lang-zh>上下文很脆弱。<br><span class="text-blue">打包它。</span></h1>
       <p data-lang-en>An open standard for bundling everything an AI agent needs — requirements, credentials, constraints, acceptance criteria — into a single <code>.nut</code> file.</p>
       <p data-lang-zh>一个开放标准，将 AI agent 所需的一切 — 需求、凭证、约束、验收标准 — 打包到一个 <code>.nut</code> 文件中。</p>
-      <div class="hero-actions">
-        <a href="#skill" class="btn btn-fill">Get Started</a>
-        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener">Read the Spec</a>
-      </div>
       <div class="install-bar" onclick="copyInstall(this)" title="Click to copy">
         <span class="dollar">$</span>
         <code>Read https://chatchat.space/nutshell-skill.md and help me use nutshell.</code>
         <span class="copy-icon-btn"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--blue);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg></span>
       </div>
       <div class="install-bar-hint"><span class="typewriter" id="hero-typewriter"></span></div>
+      <div class="hero-actions">
+        <a href="#skill" class="btn btn-fill">Get Started</a>
+        <a href="https://github.com/ChatChatTech/nutshell" class="btn btn-outline" target="_blank" rel="noopener">Read the Spec</a>
+      </div>
     </div>
     <div class="encapsulation-visual">
       <div class="data-particle dp-1" style="--x:80px;--y:50px;">requirements.md</div>
@@ -757,7 +757,7 @@ function copyInstall(bar){
       'One line is all your Agent needs.',
       'Your Agent reads, you relax.',
       'Ctrl+V into chat. Magic happens.',
-      'Feed this to any LLM. Instant nutshell pro.',
+      'Paste this to any AI agent. Instant nutshell pro.',
       'No install. No config. Just paste.',
       'Give your Agent a superpower in 3 seconds.',
       'Works with ChatGPT, Claude, Gemini, anything.',
@@ -769,7 +769,7 @@ function copyInstall(bar){
       '\u4e00\u53e5\u8bdd\u6559\u4f1a\u4f60\u7684 Agent\u3002',
       'Agent \u8bfb\uff0c\u4f60\u8e3a\u3002',
       'Ctrl+V \u7c98\u8d34\u5230\u5bf9\u8bdd\u6846\uff0c\u5947\u8ff9\u53d1\u751f\u3002',
-      '\u558a\u4efb\u4f55\u5927\u6a21\u578b\u5403\u4e0b\u8fd9\u53e5\u8bdd\uff0c\u79d2\u53d8 nutshell \u8001\u624b\u3002',
+      '\u53d1\u7ed9\u4efb\u4f55 AI agent\uff0c\u79d2\u53d8 nutshell \u8001\u624b\u3002',
       '\u4e0d\u7528\u88c5\u3001\u4e0d\u7528\u914d\u3001\u7c98\u8d34\u5c31\u884c\u3002',
       '\u4e09\u79d2\u7ed9\u4f60\u7684 Agent \u52a0\u4e2a\u6280\u80fd\u70b9\u3002',
       '\u517c\u5bb9 ChatGPT\u3001Claude\u3001Gemini\u2026\u968f\u4fbf\u54ea\u4e2a\u3002',
