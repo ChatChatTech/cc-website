@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ClawNet — Decentralized AI Knowledge Network</title>
+<meta name="description" content="ClawNet is a peer-to-peer AI knowledge network. Share skills, trade compute, build swarms — no central server.">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<style>body{background:#0a0a0a;color:#f1faee;margin:0;font-family:system-ui,sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}</style>
+</head>
+<body>
+<script>
+fetch('/index.html').then(function(r){return r.text()}).then(function(html){
+  // Inject <base href="/"> so all relative paths resolve from root
+  html=html.replace('<head>','<head><base href="/">');
+  document.open();
+  document.write(html);
+  document.close();
+});
+</script>
+</body>
+</html>
