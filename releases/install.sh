@@ -3,8 +3,7 @@
 # Usage: curl -fsSL https://chatchat.space/releases/install.sh | bash
 set -euo pipefail
 
-BINARY_URL="https://chatchat.space/releases/clawnet-linux-amd64"
-SMOL_URL="https://chatchat.space/releases/clawnet-smol-linux-amd64"
+REPO="ChatChatTech/ClawNet"
 INSTALL_DIR="/usr/local/bin"
 BINARY_NAME="clawnet"
 
@@ -30,22 +29,42 @@ cat <<'BANNER'
 
 BANNER
 
-# ── Checks ──
-[[ "$(uname -s)" == "Linux" ]] || err "This installer only supports Linux (detected: $(uname -s))"
-[[ "$(uname -m)" == "x86_64" ]] || err "This installer only supports amd64 (detected: $(uname -m))"
+# ── Detect OS ──
+OS="$(uname -s)"
+case "$OS" in
+  Linux*)  OS_TAG="linux" ;;
+  Darwin*) OS_TAG="darwin" ;;
+  MINGW*|MSYS*|CYGWIN*) OS_TAG="windows" ;;
+  *) err "Unsupported OS: $OS" ;;
+esac
+
+# ── Detect arch ──
+ARCH="$(uname -m)"
+case "$ARCH" in
+  x86_64|amd64)  ARCH_TAG="amd64" ;;
+  aarch64|arm64)  ARCH_TAG="arm64" ;;
+  *) err "Unsupported architecture: $ARCH" ;;
+esac
+
+# ── Build asset name ──
+if [[ "$OS_TAG" == "windows" ]]; then
+  ASSET="${BINARY_NAME}-${OS_TAG}-${ARCH_TAG}.exe"
+else
+  ASSET="${BINARY_NAME}-${OS_TAG}-${ARCH_TAG}"
+fi
 
 command -v curl >/dev/null 2>&1 || err "curl is required but not installed"
 
+# ── Get latest release tag from GitHub API ──
+info "Detecting latest ClawNet release..."
+TAG=$(curl -fsSL "https://api.github.com/repos/${REPO}/releases/latest" | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"\([^"]*\)".*/\1/')
+[[ -n "$TAG" ]] || err "Could not determine latest release"
+
+DOWNLOAD_URL="https://github.com/${REPO}/releases/download/${TAG}/${ASSET}"
+info "Downloading ClawNet ${TAG} for ${OS_TAG}/${ARCH_TAG}..."
+info "  ${DOWNLOAD_URL}"
+
 # ── Download ──
-DOWNLOAD_URL="$BINARY_URL"
-if [[ "${CLAWNET_SMOL:-}" == "1" ]] || [[ "${1:-}" == "--smol" ]]; then
-    info "Using smol build (country-level geo, ~46MB)..."
-    DOWNLOAD_URL="$SMOL_URL"
-else
-    info "Using full build (city-level geo, ~67MB)..."
-    info "Tip: use --smol or CLAWNET_SMOL=1 for a smaller download"
-fi
-info "Downloading clawnet binary..."
 TMP=$(mktemp /tmp/clawnet.XXXXXXXX)
 trap 'rm -f "$TMP"' EXIT
 curl -fSL --progress-bar "$DOWNLOAD_URL" -o "$TMP"
