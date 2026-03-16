@@ -1,29 +1,309 @@
 [
-  {"peer_id":"12D3KooWJyXfkGKZqfeHV8KXtuj1gHwV3L9AD6Weh4x7hjhauDEQ","location":"Beijing, CN","lat":39.9042,"lon":116.4074,"self":true},
-  {"peer_id":"12D3KooWR7mj7sfKTYu67EqCxoJupUYdxFWKR479ry9bfNesyUjZ","location":"Beijing, CN","lat":39.91,"lon":116.40},
-  {"peer_id":"12D3KooWHVxw1ifSfoMCPJXypyhRjwN1YFdjsSvXTe94JLXpmQ89","location":"Beijing, CN","lat":39.90,"lon":116.42},
-  {"peer_id":"12D3KooWEh585SGHXwvMc9tGQcLY5DTR3WVd5qaxKBR1XYrrh3b8","location":"Beijing, CN","lat":39.89,"lon":116.38},
-  {"peer_id":"12D3KooWCqG6AgdrYBfauKrNtQuUbYssK1k8Dq6he3jKkCUkaGpU","location":"Beijing, CN","lat":39.92,"lon":116.44},
-  {"peer_id":"12D3KooWCiE4jjFfi1HKC5z9QsHetVoK8D2qCmDkGC6uz2zqWkix","location":"Beijing, CN","lat":39.87,"lon":116.36},
-  {"peer_id":"12D3KooWAtlasMLinSanFrancisco","location":"San Francisco, US","lat":37.77,"lon":-122.42},
-  {"peer_id":"12D3KooWCryptoSageLondon","location":"London, GB","lat":51.51,"lon":-0.13},
-  {"peer_id":"12D3KooWCodeReviewBotTokyo","location":"Tokyo, JP","lat":35.68,"lon":139.65},
-  {"peer_id":"12D3KooWDataPipeSydney","location":"Sydney, AU","lat":-33.87,"lon":151.21},
-  {"peer_id":"12D3KooWSecGuardParis","location":"Paris, FR","lat":48.86,"lon":2.35},
-  {"peer_id":"12D3KooWNLPWizardBerlin","location":"Berlin, DE","lat":52.52,"lon":13.41},
-  {"peer_id":"12D3KooWQuantBotSingapore","location":"Singapore, SG","lat":1.35,"lon":103.82},
-  {"peer_id":"12D3KooWDevOpsVancouver","location":"Vancouver, CA","lat":49.28,"lon":-123.12},
-  {"peer_id":"12D3KooWBioInfoMoscow","location":"Moscow, RU","lat":55.76,"lon":37.62},
-  {"peer_id":"12D3KooWLegalAISaoPaulo","location":"São Paulo, BR","lat":-23.55,"lon":-46.63},
-  {"peer_id":"12D3KooWFinBotNewYork","location":"New York, US","lat":40.71,"lon":-74.01},
-  {"peer_id":"12D3KooWRoboticsDubai","location":"Dubai, AE","lat":25.20,"lon":55.27},
-  {"peer_id":"12D3KooWMLOpsSeoul","location":"Seoul, KR","lat":37.57,"lon":126.98},
-  {"peer_id":"12D3KooWSwarmMumbai","location":"Mumbai, IN","lat":19.08,"lon":72.88},
-  {"peer_id":"12D3KooWTranslateOsaka","location":"Osaka, JP","lat":34.69,"lon":135.50},
-  {"peer_id":"12D3KooWVisionCapeTown","location":"Cape Town, ZA","lat":-33.93,"lon":18.42},
-  {"peer_id":"12D3KooWAudioStockholm","location":"Stockholm, SE","lat":59.33,"lon":18.07},
-  {"peer_id":"12D3KooWGraphBuenosAires","location":"Buenos Aires, AR","lat":-34.60,"lon":-58.38},
-  {"peer_id":"12D3KooWReasonBangkok","location":"Bangkok, TH","lat":13.76,"lon":100.50},
-  {"peer_id":"12D3KooWSynthNairobi","location":"Nairobi, KE","lat":-1.29,"lon":36.82},
-  {"peer_id":"12D3KooWDeepLearnJakarta","location":"Jakarta, ID","lat":-6.21,"lon":106.85}
+  {
+    "peer_id": "overlay-peer-050",
+    "location": "Shenyang, CN",
+    "lat": 41.7922,
+    "lon": 123.4329,
+    "self": true
+  },
+  {
+    "peer_id": "overlay-peer-043",
+    "location": "Alexandria, AU",
+    "lat": -33.9022,
+    "lon": 151.2003
+  },
+  {
+    "peer_id": "overlay-peer-001",
+    "location": "Amsterdam, NL",
+    "lat": 52.3785,
+    "lon": 4.9
+  },
+  {
+    "peer_id": "overlay-peer-004",
+    "location": "Ashburn, US",
+    "lat": 39.0395,
+    "lon": -77.4918
+  },
+  {
+    "peer_id": "overlay-peer-019",
+    "location": "Beijing, CN",
+    "lat": 39.9075,
+    "lon": 116.3971
+  },
+  {
+    "peer_id": "overlay-peer-032",
+    "location": "Bila Tserkva, UA",
+    "lat": 49.8094,
+    "lon": 30.1121
+  },
+  {
+    "peer_id": "overlay-peer-040",
+    "location": "Bucharest, RO",
+    "lat": 44.4323,
+    "lon": 26.1061
+  },
+  {
+    "peer_id": "overlay-peer-017",
+    "location": "Falkenstein, DE",
+    "lat": 50.4779,
+    "lon": 12.3716
+  },
+  {
+    "peer_id": "overlay-peer-031",
+    "location": "Frankfurt am Main, DE",
+    "lat": 50.1109,
+    "lon": 8.682
+  },
+  {
+    "peer_id": "overlay-peer-028",
+    "location": "Helsinki, FI",
+    "lat": 60.1695,
+    "lon": 24.9354
+  },
+  {
+    "peer_id": "overlay-peer-024",
+    "location": "Hong Kong, HK",
+    "lat": 22.2855,
+    "lon": 114.1577
+  },
+  {
+    "peer_id": "overlay-peer-015",
+    "location": "Jeddah, SA",
+    "lat": 21.5169,
+    "lon": 39.2192
+  },
+  {
+    "peer_id": "overlay-peer-003",
+    "location": "Kansas City, US",
+    "lat": 39.0997,
+    "lon": -94.5786
+  },
+  {
+    "peer_id": "overlay-peer-042",
+    "location": "Karlsruhe, DE",
+    "lat": 49.0047,
+    "lon": 8.3858
+  },
+  {
+    "peer_id": "overlay-peer-047",
+    "location": "Kemerovo, RU",
+    "lat": 55.3334,
+    "lon": 86.0831
+  },
+  {
+    "peer_id": "overlay-peer-049",
+    "location": "Krasnoyarsk, RU",
+    "lat": 56.0098,
+    "lon": 92.7925
+  },
+  {
+    "peer_id": "overlay-peer-039",
+    "location": "Kyiv, UA",
+    "lat": 50.4547,
+    "lon": 30.5238
+  },
+  {
+    "peer_id": "overlay-peer-007",
+    "location": "Las Vegas, US",
+    "lat": 36.175,
+    "lon": -115.1372
+  },
+  {
+    "peer_id": "overlay-peer-010",
+    "location": "Lenina, RU",
+    "lat": 46.0667,
+    "lon": 39.7833
+  },
+  {
+    "peer_id": "overlay-peer-014",
+    "location": "Liberty Lake, US",
+    "lat": 47.6759,
+    "lon": -117.1182
+  },
+  {
+    "peer_id": "overlay-peer-016",
+    "location": "Linkoping, SE",
+    "lat": 58.4166,
+    "lon": 15.6167
+  },
+  {
+    "peer_id": "overlay-peer-018",
+    "location": "London, GB",
+    "lat": 51.5085,
+    "lon": -0.1257
+  },
+  {
+    "peer_id": "overlay-peer-025",
+    "location": "Madrid, ES",
+    "lat": 40.4168,
+    "lon": -3.6847
+  },
+  {
+    "peer_id": "overlay-peer-030",
+    "location": "Maidenhead, GB",
+    "lat": 51.5228,
+    "lon": -0.7199
+  },
+  {
+    "peer_id": "overlay-peer-033",
+    "location": "Manassas, US",
+    "lat": 38.751,
+    "lon": -77.4752
+  },
+  {
+    "peer_id": "overlay-peer-045",
+    "location": "Minneapolis, US",
+    "lat": 44.98,
+    "lon": -93.2639
+  },
+  {
+    "peer_id": "overlay-peer-026",
+    "location": "Montreal, CA",
+    "lat": 45.5088,
+    "lon": -73.5878
+  },
+  {
+    "peer_id": "overlay-peer-002",
+    "location": "Moscow, RU",
+    "lat": 55.7523,
+    "lon": 37.6155
+  },
+  {
+    "peer_id": "overlay-peer-021",
+    "location": "Nuremberg, DE",
+    "lat": 49.4478,
+    "lon": 11.0683
+  },
+  {
+    "peer_id": "overlay-peer-022",
+    "location": "Paris, FR",
+    "lat": 48.8591,
+    "lon": 2.2935
+  },
+  {
+    "peer_id": "overlay-peer-034",
+    "location": "Philadelphia, US",
+    "lat": 39.9523,
+    "lon": -75.1638
+  },
+  {
+    "peer_id": "overlay-peer-044",
+    "location": "Podol'sk, RU",
+    "lat": 55.4242,
+    "lon": 37.5547
+  },
+  {
+    "peer_id": "overlay-peer-048",
+    "location": "Port Melbourne, AU",
+    "lat": -37.8396,
+    "lon": 144.9423
+  },
+  {
+    "peer_id": "overlay-peer-000",
+    "location": "Roubaix, FR",
+    "lat": 50.6937,
+    "lon": 3.1744
+  },
+  {
+    "peer_id": "overlay-peer-009",
+    "location": "Saint Petersburg, RU",
+    "lat": 59.8944,
+    "lon": 30.2642
+  },
+  {
+    "peer_id": "overlay-peer-041",
+    "location": "Samorin, SK",
+    "lat": 48.0302,
+    "lon": 17.3097
+  },
+  {
+    "peer_id": "overlay-peer-012",
+    "location": "Santiago, CL",
+    "lat": -33.4265,
+    "lon": -70.5665
+  },
+  {
+    "peer_id": "overlay-peer-008",
+    "location": "Sheridan, US",
+    "lat": 44.7973,
+    "lon": -106.9562
+  },
+  {
+    "peer_id": "overlay-peer-046",
+    "location": "Singapore, SG",
+    "lat": 1.29,
+    "lon": 103.8503
+  },
+  {
+    "peer_id": "overlay-peer-006",
+    "location": "Staten Island, US",
+    "lat": 40.5763,
+    "lon": -74.1448
+  },
+  {
+    "peer_id": "overlay-peer-035",
+    "location": "Stockholm, SE",
+    "lat": 59.3327,
+    "lon": 18.0648
+  },
+  {
+    "peer_id": "overlay-peer-013",
+    "location": "Strasbourg, FR",
+    "lat": 48.5837,
+    "lon": 7.7427
+  },
+  {
+    "peer_id": "overlay-peer-020",
+    "location": "Tokyo, JP",
+    "lat": 35.6895,
+    "lon": 139.6923
+  },
+  {
+    "peer_id": "overlay-peer-005",
+    "location": "Toronto, CA",
+    "lat": 43.6537,
+    "lon": -79.3829
+  },
+  {
+    "peer_id": "overlay-peer-037",
+    "location": "Valdivia, CL",
+    "lat": -39.8142,
+    "lon": -73.2462
+  },
+  {
+    "peer_id": "overlay-peer-027",
+    "location": "Vienna, AT",
+    "lat": 48.2089,
+    "lon": 16.3721
+  },
+  {
+    "peer_id": "overlay-peer-036",
+    "location": "Vladivostok, RU",
+    "lat": 43.1056,
+    "lon": 131.8735
+  },
+  {
+    "peer_id": "overlay-peer-029",
+    "location": "Volchansk, RU",
+    "lat": 59.9378,
+    "lon": 60.081
+  },
+  {
+    "peer_id": "overlay-peer-038",
+    "location": "Worcester, ZA",
+    "lat": -33.6465,
+    "lon": 19.4485
+  },
+  {
+    "peer_id": "overlay-peer-011",
+    "location": "Yekaterinburg, RU",
+    "lat": 56.8575,
+    "lon": 60.6125
+  },
+  {
+    "peer_id": "overlay-peer-023",
+    "location": "Yerevan, AM",
+    "lat": 40.1816,
+    "lon": 44.5142
+  }
 ]
