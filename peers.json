@@ -305,5 +305,101 @@
     "location": "Yerevan, AM",
     "lat": 40.1816,
     "lon": 44.5142
+  },
+  {
+    "peer_id": "12D3KooWKdo9K2cFUjwhHaJPBMcGYv6gkJUahSiB5ftBa18WDpiy",
+    "location": "Hangzhou, CN",
+    "lat": 30.2936,
+    "lon": 120.1616
+  },
+  {
+    "peer_id": "12D3KooWL8YK42ypUPw9gtEghN6zCLt582sgwUx2UXUiSuD4R8gc",
+    "location": "Hangzhou, CN",
+    "lat": 30.2936,
+    "lon": 120.1616
+  },
+  {
+    "peer_id": "12D3KooWGSyimZRVFvwobTKJhrpMhycQgKgD94SHMskjAp1ZtBR5",
+    "location": "Hefei, CN",
+    "lat": 31.8638,
+    "lon": 117.2808
+  },
+  {
+    "peer_id": "12D3KooWGHWFv2rRrh325RovEssirgADLu5Dswbp66KtxfRwZSHg",
+    "location": "Santa Clara, US",
+    "lat": 37.133,
+    "lon": -113.6541
+  },
+  {
+    "peer_id": "12D3KooWEwqbm9hnAn5kB6ecMVzaixAj1UoR7JD6fzCH6GTUYtKW",
+    "location": "Beijing, CN",
+    "lat": 39.9075,
+    "lon": 116.3971
+  },
+  {
+    "peer_id": "12D3KooWLgWA1RFCcdYRLwUKzkj12B7Lh6KF88C3mXgHpVC8iYr9",
+    "location": "Beijing, CN",
+    "lat": 39.9075,
+    "lon": 116.3971
+  },
+  {
+    "peer_id": "12D3KooWRF8yrRrYo8ddEecE7v2n5wioMPqvYP1CooCoSB3GudWW",
+    "location": "Beijing, CN",
+    "lat": 39.9075,
+    "lon": 116.3971
+  },
+  {
+    "peer_id": "overlay-peer-051",
+    "location": "Shanghai, CN",
+    "lat": 31.2304,
+    "lon": 121.4737
+  },
+  {
+    "peer_id": "overlay-peer-052",
+    "location": "Shenzhen, CN",
+    "lat": 22.5431,
+    "lon": 114.0579
+  },
+  {
+    "peer_id": "overlay-peer-053",
+    "location": "Seoul, KR",
+    "lat": 37.5665,
+    "lon": 126.978
+  },
+  {
+    "peer_id": "overlay-peer-054",
+    "location": "Mumbai, IN",
+    "lat": 19.076,
+    "lon": 72.8777
+  },
+  {
+    "peer_id": "overlay-peer-055",
+    "location": "Sydney, AU",
+    "lat": -33.8688,
+    "lon": 151.2093
+  },
+  {
+    "peer_id": "overlay-peer-056",
+    "location": "Dubai, AE",
+    "lat": 25.2048,
+    "lon": 55.2708
+  },
+  {
+    "peer_id": "overlay-peer-057",
+    "location": "Taipei, TW",
+    "lat": 25.033,
+    "lon": 121.5654
+  },
+  {
+    "peer_id": "overlay-peer-058",
+    "location": "Bangkok, TH",
+    "lat": 13.7563,
+    "lon": 100.5018
+  },
+  {
+    "peer_id": "overlay-peer-059",
+    "location": "Chengdu, CN",
+    "lat": 30.5728,
+    "lon": 104.0668
   }
 ]
